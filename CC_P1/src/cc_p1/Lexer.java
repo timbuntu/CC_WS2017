@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
+import cc_p1.Exceptions.*;
 import cc_p1.TokenDefinition.*;
 
 /**
@@ -25,7 +26,11 @@ public class Lexer {
         this.symbolTable = symbolTable;
     }
     
-    public Token getToken() {
+    public Token getToken() throws UnknownLexemeException {
+        
+        if(!inStreamScanner.hasNext())
+            return new Token(Token.TokenType.EOF, true);
+        
         String lexeme = inStreamScanner.next();
         Token.TokenType type = null;
         
@@ -50,7 +55,7 @@ public class Lexer {
         } else if(Operator.match(lexeme)) {
             type = Token.TokenType.OPERATOR;
         } else {
-            
+            throw new UnknownLexemeException();
         }
         
         return new Token(type, type.getType().cast(lexeme));

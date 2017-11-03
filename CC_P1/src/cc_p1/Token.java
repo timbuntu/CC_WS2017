@@ -56,7 +56,8 @@ public class Token {
         STRING_LITERAL(String.class),
         INT_LITERAL(Integer.class),
         FLOAT_LITERAL(Float.class),
-        OPERATOR(String.class);
+        OPERATOR(String.class),
+        EOF(Boolean.class);
 
         private Class type;
         
