@@ -17,6 +17,10 @@ public class Operator {
     final static String l_right_bracket = "^\\);*$";
     final static String l_semicolon = "^;$";
     final static String l_dot = "^\\.$";
+    final static String l_comma = "^,$";
+    final static String l_equal = "^=$";
+    final static String l_plus = "^\\+$";
+    final static String l_minus = "^\\-$";
 
     public static boolean match(String value) {
         for (Field field : Operator.class.getDeclaredFields()) {
