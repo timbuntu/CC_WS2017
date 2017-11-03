@@ -22,7 +22,7 @@ public class Lexer {
 
     public Lexer(InputStream inStream, List<String> symbolTable) {
         this.inStreamScanner = new Scanner(inStream);
-        this.inStreamScanner.useDelimiter(Pattern.compile(" "));
+        this.inStreamScanner.useDelimiter(Pattern.compile("[ \\t\\n]"));
         this.symbolTable = symbolTable;
     }
     
@@ -65,8 +65,12 @@ public class Lexer {
             type = Token.TokenType.OPERATOR;
             value = lexeme;
             
-        } else {
-            throw new UnknownLexemeException();
+        } else if(Ignore.match(lexeme)) {
+            return getToken();
+        }
+        
+        else {
+            throw new UnknownLexemeException(lexeme);
         }
         
         return new Token(type, type.getType().cast(value));

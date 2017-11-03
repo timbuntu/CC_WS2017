@@ -13,10 +13,10 @@ import java.lang.reflect.Field;
  */
 public class IntLiteral {
     
-    final static String l_int_literal = "^[0-9]+$";
+    final static String l_int_literal = "^[0-9]+;*$";
 
     public static boolean match(String value) {
-        for (Field field : Identifier.class.getDeclaredFields()) {
+        for (Field field : IntLiteral.class.getDeclaredFields()) {
             try {
                 if (value.matches((String) field.get(null))) {
                     return true;

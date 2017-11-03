@@ -14,10 +14,10 @@ import java.lang.reflect.Field;
 public class StringLiteral {
     // simplified str_literal
 
-    final static String l_string = "^[\"`][^\"']*[\"`]$";
+    final static String l_string = "^[\"`][^\"']*[\"`];*$";
 
     public static boolean match(String value) {
-        for (Field field : Identifier.class.getDeclaredFields()) {
+        for (Field field : StringLiteral.class.getDeclaredFields()) {
             try {
                 if (value.matches((String) field.get(null))) {
                     return true;

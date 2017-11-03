@@ -11,9 +11,9 @@ package cc_p1;
  */
 public class Exceptions {
     public static class UnknownLexemeException extends Exception {
-
-        public UnknownLexemeException() {
-            
+        
+        public UnknownLexemeException(String lexeme) {
+            super(" \""+ lexeme + "\"");
         }
         
     }

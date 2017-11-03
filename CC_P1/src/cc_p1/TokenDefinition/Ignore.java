@@ -9,14 +9,13 @@ import java.lang.reflect.Field;
 
 /**
  *
- * @author matti
+ * @author tim
  */
-public class FloatLiteral {
-
-    final static String l_int_literal = "^([0-9]*\\.[0-9]+|[0-9]+\\.[0-9]*);*$";
+public class Ignore {
+    final static String i_white = "\\s*";
 
     public static boolean match(String value) {
-        for (Field field : FloatLiteral.class.getDeclaredFields()) {
+        for (Field field : Ignore.class.getDeclaredFields()) {
             try {
                 if (value.matches((String) field.get(null))) {
                     return true;

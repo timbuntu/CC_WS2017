@@ -24,3 +24,5 @@ hs_err_pid*
 
 # ignore vim swap
 *.swp
+/CC_P1/build/
+/CC_P1/dist/

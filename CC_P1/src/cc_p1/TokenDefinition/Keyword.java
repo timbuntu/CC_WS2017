@@ -14,11 +14,11 @@ import java.lang.reflect.Field;
 public class Keyword {
 
     // keywords
-    final static String k_import = "1[Ii]mport$";
     final static String k_package = "^package$";
+    final static String k_import = "1[Ii]mport$";
 
     public static boolean match(String value) {
-        for (Field field : Identifier.class.getDeclaredFields()) {
+        for (Field field : Keyword.class.getDeclaredFields()) {
             try {
                 if (value.matches((String) field.get(null))) {
                     return true;

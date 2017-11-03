@@ -13,7 +13,7 @@ import java.lang.reflect.Field;
  */
 public class Identifier {
 
-    final static String identifier = "^[A-Za-z0-9][A-Za-z_0-9_]*$";
+    final static String identifier = "^[A-Za-z][A-Za-z_0-9_]*;*$";
 
     public static boolean match(String value) {
         for (Field field : Identifier.class.getDeclaredFields()) {
