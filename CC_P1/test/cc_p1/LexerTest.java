@@ -51,8 +51,34 @@ public class LexerTest {
      * Test of getToken method, of class Lexer.
      */
     @Test
+    public void testGoodPackageFile() throws Exception {
+        System.out.println("testGoodPackageFile");
+        String file = "/resources/good_package.go";
+        List<String> symbolTable = new ArrayList<>();
+
+        InputStream fileStream = this.getClass().getResourceAsStream(file);
+        Lexer lexer = new Lexer(fileStream, symbolTable);
+
+        while (lexer.getToken().getType() != Token.TokenType.EOF) {
+        }
+    }
+
+    @Test(expected = UnknownLexemeException.class)
+    public void testBadPackageFile() throws Exception {
+        System.out.println("testBadPackageFile");
+        String file = "/resources/bad_package.go";
+        List<String> symbolTable = new ArrayList<>();
+
+        InputStream fileStream = this.getClass().getResourceAsStream(file);
+        Lexer lexer = new Lexer(fileStream, symbolTable);
+
+        while (lexer.getToken().getType() != Token.TokenType.EOF) {
+        }
+    }
+
+    @Test
     public void testGoodImportFile() throws Exception {
-        System.out.println("getToken");
+        System.out.println("testGoodImportFile");
         String file = "/resources/good_import.go";
         List<String> symbolTable = new ArrayList<>();
 
@@ -65,7 +91,7 @@ public class LexerTest {
 
     @Test(expected = UnknownLexemeException.class)
     public void testBadImportFile() throws Exception {
-        System.out.println("getToken");
+        System.out.println("testBadImportFile");
         String file = "/resources/bad_import.go";
         List<String> symbolTable = new ArrayList<>();
 
@@ -75,5 +101,4 @@ public class LexerTest {
         while (lexer.getToken().getType() != Token.TokenType.EOF) {
         }
     }
-
 }
