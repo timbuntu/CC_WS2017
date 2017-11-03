@@ -12,28 +12,28 @@ import java.util.List;
  * @author tim
  */
 public class SymbolTableEntry {
-    private String tokenName;
-    private String attributeValue;
+    private String name;
+    private String value;
 
     public SymbolTableEntry(String tokenName, String attributeValue) {
-        this.tokenName = tokenName;
-        this.attributeValue = attributeValue;
+        this.name = tokenName;
+        this.value = attributeValue;
     }
 
-    public String getAttributeValue() {
-        return attributeValue;
+    public String getValue() {
+        return value;
     }
 
-    public void setAttributeValue(String attributeValue) {
-        this.attributeValue = attributeValue;
+    public void setValue(String value) {
+        this.value = value;
     }
 
-    public String getTokenName() {
-        return tokenName;
+    public String getName() {
+        return name;
     }
 
-    public void setTokenName(String tokenName) {
-        this.tokenName = tokenName;
+    public void setName(String name) {
+        this.name = name;
     }
     
     
