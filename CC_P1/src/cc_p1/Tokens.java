@@ -11,12 +11,14 @@ package cc_p1;
  */
 public class Tokens {
     // simplified str_literal
-    final String l_string = "[\"`][^\"']*[\"`]";
+    final static String l_string = "[\"`][^\"']*[\"`]";
+    final static String identifier = "[A-Za-z0-9][A-Za-z_0-9_]*";
     
     // keywords
-    final String k_import = "[Ii]mport";
-    final String k_left_bracket = "(";
-    final String k_right_bracket = ")";
-    final String k_semicolon = ";";
-    final String k_dot = ".";
+    final static String k_import = "[Ii]mport";
+    final static String k_package = "package";
+    final static String k_left_bracket = "(";
+    final static String k_right_bracket = ")";
+    final static String k_semicolon = ";";
+    final static String k_dot = ".";
 }
