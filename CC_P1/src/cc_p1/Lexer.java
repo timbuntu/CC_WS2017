@@ -35,17 +35,7 @@ public class Lexer {
         Token.TokenType type = null;
         Object value = null;
         
-        if(cc_p1.TokenDefinition.Identifier.match(lexeme)) {
-            type = Token.TokenType.IDENTIFIER;
-            int index = symbolTable.indexOf(lexeme);
-            if(index == -1) {
-                symbolTable.add(lexeme);
-                index = symbolTable.size()-1;
-            }
-                
-            value = index;
-                
-        } else if(StringLiteral.match(lexeme)) {
+        if(StringLiteral.match(lexeme)) {
             type = Token.TokenType.STRING_LITERAL;
             value = lexeme;
             
@@ -67,6 +57,16 @@ public class Lexer {
             
         } else if(Ignore.match(lexeme)) {
             return getToken();
+        } else if(cc_p1.TokenDefinition.Identifier.match(lexeme)) {
+            type = Token.TokenType.IDENTIFIER;
+            int index = symbolTable.indexOf(lexeme);
+            if(index == -1) {
+                symbolTable.add(lexeme);
+                index = symbolTable.size()-1;
+            }
+                
+            value = index;
+                
         }
         
         else {

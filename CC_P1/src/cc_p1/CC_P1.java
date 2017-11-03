@@ -43,10 +43,12 @@ public class CC_P1 {
         }
 
         Lexer lexer = new Lexer(fileStream, symbolTable);
+        Parser parser = new Parser(lexer, symbolTable);
+        
         try {
-            while (lexer.getToken().getType() != Token.TokenType.EOF) {
-            }
-        } catch (UnknownLexemeException ex) {
+            Node ast = parser.parse();
+            ast.print(0);
+        } catch (Exception ex) {
             Logger.getLogger(CC_P1.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
