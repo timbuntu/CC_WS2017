@@ -33,6 +33,7 @@ public class Lexer {
         
         String lexeme = inStreamScanner.next();
         Token.TokenType type = null;
+        Object value = null;
         
         if(cc_p1.TokenDefinition.Identifier.match(lexeme)) {
             type = Token.TokenType.IDENTIFIER;
@@ -42,23 +43,33 @@ public class Lexer {
                 index = symbolTable.size()-1;
             }
                 
-            lexeme = String.valueOf(index);
+            value = index;
                 
         } else if(StringLiteral.match(lexeme)) {
             type = Token.TokenType.STRING_LITERAL;
+            value = lexeme;
+            
         } else if(Keyword.match(lexeme)) {
             type = Token.TokenType.KEYWORD;
+            value = lexeme;
+            
         } else if(IntLiteral.match(lexeme)) {
             type = Token.TokenType.INT_LITERAL;
+            value = Integer.valueOf(lexeme);
+            
         } else if(FloatLiteral.match(lexeme)) {
             type = Token.TokenType.FLOAT_LITERAL;
+            value = Float.valueOf(lexeme);
+            
         } else if(Operator.match(lexeme)) {
             type = Token.TokenType.OPERATOR;
+            value = lexeme;
+            
         } else {
             throw new UnknownLexemeException();
         }
         
-        return new Token(type, type.getType().cast(lexeme));
+        return new Token(type, type.getType().cast(value));
         
     }
     
