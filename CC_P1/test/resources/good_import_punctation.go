@@ -1,2 +1,4 @@
+package foo ;
+
 import
  ."errors"
