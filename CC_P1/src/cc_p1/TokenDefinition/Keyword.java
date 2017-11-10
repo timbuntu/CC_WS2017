@@ -14,10 +14,10 @@ import java.lang.reflect.Field;
 public class Keyword {
 
     // keywords
-    final static String k_package = "^package$";
-    final static String k_import = "^[Ii]mport$";
-    final static String k_var = "^var$";
-    final static String k_const = "^const$";
+    public final static String k_package = "^package$";
+    public final static String k_import = "^[Ii]mport$";
+    public final static String k_var = "^var$";
+    public final static String k_const = "^const$";
 
     public static boolean match(String value) {
         for (Field field : Keyword.class.getDeclaredFields()) {

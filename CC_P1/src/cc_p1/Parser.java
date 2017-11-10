@@ -5,6 +5,8 @@
  */
 package cc_p1;
 
+import cc_p1.TokenDefinition.Keyword;
+import cc_p1.TokenDefinition.Operator;
 import java.util.List;
 
 /**
@@ -13,8 +15,8 @@ import java.util.List;
  */
 public class Parser {
 
-    private List<String> symbolTable;
-    private Lexer lexer;
+    private final List<String> symbolTable;
+    private final Lexer lexer;
     private Token nextToken;
 
     public Parser(Lexer lex, List<String> symbolTable) {
@@ -53,9 +55,9 @@ public class Parser {
 
         Node t = new Node("PackageClause");
         
-        if (nextToken.getType().toString().equals(Token.TokenType.KEYWORD.toString())) {
+        if (nextToken.getType() == Token.TokenType.KEYWORD) {
             
-            if (String.valueOf(nextToken.getValue()).equals("package")) {
+            if (String.valueOf(nextToken.getValue()).matches(Keyword.k_package)) {
                 t.addNode(new Leaf(nextToken));
                 
                 nextToken = lexer.getToken();
@@ -91,24 +93,24 @@ public class Parser {
         
         Node t = new Node("ImportDecl");
         
-        if(nextToken.getType() == Token.TokenType.KEYWORD && String.valueOf(nextToken.getValue()).equals("import")) {
+        if(nextToken.getType() == Token.TokenType.KEYWORD && String.valueOf(nextToken.getValue()).matches(Keyword.k_import)) {
             nextToken = lexer.getToken();
             switch(nextToken.getType()) {
                 case OPERATOR:
-                    if(String.valueOf(nextToken.getValue()).equals("(")) {
+                    if(String.valueOf(nextToken.getValue()).matches(Operator.l_left_bracket)) {
                         t.addNode(new Leaf(nextToken));
                         nextToken = lexer.getToken();
                         Node importSpec = null;
                         while((importSpec = parseImportSpec()) != null) {
                             t.addNode(importSpec);
-                            if(String.valueOf(nextToken.getValue()).equals(";")) {
+                            if(String.valueOf(nextToken.getValue()).matches(Operator.l_semicolon)) {
                                 t.addNode(new Leaf(nextToken));
                                 nextToken = lexer.getToken();
                             } else {
                                 throw new Exceptions.ParsingException(nextToken.getValue());
                             }
                         }
-                        if(String.valueOf(nextToken.getValue()).equals(")")) {
+                        if(String.valueOf(nextToken.getValue()).matches(Operator.l_right_bracket)) {
                             t.addNode(new Leaf(nextToken));
                             nextToken = lexer.getToken();
                         } else {
@@ -127,7 +129,7 @@ public class Parser {
         
         switch(nextToken.getType()) {
             case OPERATOR:
-                if(String.valueOf(nextToken.getValue()).equals(".")) {      //Create leaf
+                if(String.valueOf(nextToken.getValue()).matches(Operator.l_dot)) {      //Create leaf
                     t.addNode(new Leaf(nextToken));
                     nextToken = lexer.getToken();
                     Node packageName = parsePackageName();

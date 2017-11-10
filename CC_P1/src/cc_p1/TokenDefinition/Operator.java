@@ -13,14 +13,14 @@ import java.lang.reflect.Field;
  */
 public class Operator {
 
-    final static String l_left_bracket = "^\\($";
-    final static String l_right_bracket = "^\\);*$";
-    final static String l_semicolon = "^;$";
-    final static String l_dot = "^\\.$";
-    final static String l_comma = "^,$";
-    final static String l_equal = "^=$";
-    final static String l_plus = "^\\+$";
-    final static String l_minus = "^\\-$";
+    public final static String l_left_bracket = "^\\($";
+    public final static String l_right_bracket = "^\\);*$";
+    public final static String l_semicolon = "^;$";
+    public final static String l_dot = "^\\.$";
+    public final static String l_comma = "^,$";
+    public final static String l_equal = "^=$";
+    public final static String l_plus = "^\\+$";
+    public final static String l_minus = "^\\-$";
 
     public static boolean match(String value) {
         for (Field field : Operator.class.getDeclaredFields()) {
