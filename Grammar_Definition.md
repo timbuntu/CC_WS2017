@@ -1,7 +1,7 @@
 # Grammar Defintion
 
 ```
-SourceFile       = PackageClause ";" { ImportDecl ";" }
+SourceFile       = PackageClause ";" { ImportDecl ";" } { TopLevelDecl }
 ```
 
 ## Package Declaration
@@ -17,6 +17,19 @@ PackageName    = identifier .
 ImportDecl       = "import" ( ImportSpec | "(" { ImportSpec ";" } ")" ) .
 ImportSpec       = [ "." | PackageName ] ImportPath .
 ImportPath       = string_lit .
+```
+
+## Top Level Declaration
+
+```
+TopLevelDecl     = FunctionDecl
+```
+
+## Function Declaration
+
+```
+FunctionDecl     = "func" FunctionName
+FunctionName     = identifier
 ```
 
 ## Lexical elements
@@ -63,6 +76,7 @@ string_lit       = "^[\"`][^\"']*[\"`];*$"
 ```
 package_key       = "^package$"
 k_import          = "^[Ii]mport$"
+k_func            = "^func$"
 k_var             = "^var$"
 k_const           = "^const$"
 ```
