@@ -17,4 +17,11 @@ public class Exceptions {
         }
         
     }
+    
+    public static class ParsingException extends Exception {
+        
+        public ParsingException(Object tokenValue) {
+            super(" Unexpected token \""+ tokenValue.toString() + "\"");
+        }
+    }
 }

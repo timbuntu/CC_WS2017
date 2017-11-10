@@ -24,7 +24,7 @@ public class Node {
     }
 
     public boolean addNode(Node n) {
-        return nodes.add(n);
+        return getNodes().add(n);
     }
 
     /**
@@ -46,9 +46,23 @@ public class Node {
         for(int i = 0; i < level; i++)
             System.out.print("\t");
             
-        System.out.println(this.name + " -->");
-        for(Node n : nodes)
+        System.out.println(this.getName() + " -->");
+        for(Node n : getNodes())
             n.print(level+1);
+    }
+
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * @param nodes the nodes to set
+     */
+    public void setNodes(List<Node> nodes) {
+        this.nodes = nodes;
     }
 }
 
