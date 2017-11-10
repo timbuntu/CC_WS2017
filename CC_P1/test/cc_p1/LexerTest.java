@@ -79,7 +79,7 @@ public class LexerTest {
     @Test
     public void testGoodImportFile() throws Exception {
         System.out.println("testGoodImportFile");
-        String file = "/resources/good_import.go";
+        String file = "/resources/lexer_good_import.go";
         List<String> symbolTable = new ArrayList<>();
 
         InputStream fileStream = this.getClass().getResourceAsStream(file);
@@ -92,7 +92,7 @@ public class LexerTest {
     @Test(expected = UnknownLexemeException.class)
     public void testBadImportFile() throws Exception {
         System.out.println("testBadImportFile");
-        String file = "/resources/bad_import.go";
+        String file = "/resources/lexer_bad_import.go";
         List<String> symbolTable = new ArrayList<>();
 
         InputStream fileStream = this.getClass().getResourceAsStream(file);

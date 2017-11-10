@@ -20,22 +20,22 @@ import static org.junit.Assert.*;
  * @author tim
  */
 public class ParserTest {
-    
+
     public ParserTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -51,7 +51,7 @@ public class ParserTest {
 
         InputStream fileStream = this.getClass().getResourceAsStream(file);
         Lexer lexer = new Lexer(fileStream, symbolTable);
-        
+
         Parser parser = new Parser(lexer, symbolTable);
         parser.parse();
     }
@@ -68,5 +68,43 @@ public class ParserTest {
         Parser parser = new Parser(lexer, symbolTable);
         parser.parse();
     }
-    
+
+    @Test
+    public void testGoodImportFile() throws Exception {
+        System.out.println("testGoodImportFile");
+        String file = "/resources/good_import.go";
+        List<String> symbolTable = new ArrayList<>();
+
+        InputStream fileStream = this.getClass().getResourceAsStream(file);
+        Lexer lexer = new Lexer(fileStream, symbolTable);
+
+        Parser parser = new Parser(lexer, symbolTable);
+        parser.parse();
+    }
+
+    @Test
+    public void testGoodImportFile2() throws Exception {
+        System.out.println("testGoodImportFile2");
+        String file = "/resources/good_import_package.go";
+        List<String> symbolTable = new ArrayList<>();
+
+        InputStream fileStream = this.getClass().getResourceAsStream(file);
+        Lexer lexer = new Lexer(fileStream, symbolTable);
+
+        Parser parser = new Parser(lexer, symbolTable);
+        parser.parse();
+    }
+
+    @Test
+    public void testGoodImportFile3() throws Exception {
+        System.out.println("testGoodImportFile3");
+        String file = "/resources/good_import_punctation.go";
+        List<String> symbolTable = new ArrayList<>();
+
+        InputStream fileStream = this.getClass().getResourceAsStream(file);
+        Lexer lexer = new Lexer(fileStream, symbolTable);
+
+        Parser parser = new Parser(lexer, symbolTable);
+        parser.parse();
+    }
 }
