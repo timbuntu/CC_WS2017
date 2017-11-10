@@ -38,7 +38,7 @@ public class Parser {
 
         Node pkg = parsePackageClause();
         if (pkg == null) {
-            throw new Exceptions.ParsingException(nextToken.getValue());
+            throw new Exceptions.ParsingException(nextToken);
         }
 
         t.addNode(pkg);
@@ -54,12 +54,12 @@ public class Parser {
     private Node parsePackageClause() throws Exception {
 
         Node t = new Node("PackageClause");
-        
+
         if (nextToken.getType() == Token.TokenType.KEYWORD) {
-            
+
             if (String.valueOf(nextToken.getValue()).matches(Keyword.k_package)) {
                 t.addNode(new Leaf(nextToken));
-                
+
                 nextToken = lexer.getToken();
                 Node pkgName = parsePackageName();
                 if (pkgName == null) {
@@ -78,7 +78,7 @@ public class Parser {
     private Node parsePackageName() throws Exception {
 
         Node t = new Node("PackageName");
-        
+
         switch (nextToken.getType()) {
             case IDENTIFIER:
                 t.addNode(new Leaf(nextToken));
@@ -90,77 +90,102 @@ public class Parser {
     }
 
     private Node parseImportDecl() throws Exception {
-        
+
         Node t = new Node("ImportDecl");
-        
-        if(nextToken.getType() == Token.TokenType.KEYWORD && String.valueOf(nextToken.getValue()).matches(Keyword.k_import)) {
+
+        if (nextToken.getType() == Token.TokenType.KEYWORD && String.valueOf(nextToken.getValue()).matches(Keyword.k_import)) {
             nextToken = lexer.getToken();
-            switch(nextToken.getType()) {
+            switch (nextToken.getType()) {
                 case OPERATOR:
-                    if(String.valueOf(nextToken.getValue()).matches(Operator.l_left_bracket)) {
+                    if (String.valueOf(nextToken.getValue()).matches(Operator.l_left_bracket)) {
                         t.addNode(new Leaf(nextToken));
                         nextToken = lexer.getToken();
                         Node importSpec = null;
-                        while((importSpec = parseImportSpec()) != null) {
+                        while ((importSpec = parseImportSpec()) != null) {
                             t.addNode(importSpec);
-                            if(String.valueOf(nextToken.getValue()).matches(Operator.l_semicolon)) {
+                            if (String.valueOf(nextToken.getValue()).matches(Operator.l_semicolon)) {
                                 t.addNode(new Leaf(nextToken));
                                 nextToken = lexer.getToken();
                             } else {
-                                throw new Exceptions.ParsingException(nextToken.getValue());
+                                throw new Exceptions.ParsingException(nextToken);
                             }
                         }
-                        if(String.valueOf(nextToken.getValue()).matches(Operator.l_right_bracket)) {
+                        if (String.valueOf(nextToken.getValue()).matches(Operator.l_right_bracket)) {
                             t.addNode(new Leaf(nextToken));
                             nextToken = lexer.getToken();
                         } else {
-                            throw new Exceptions.ParsingException(nextToken.getValue());
+                            throw new Exceptions.ParsingException(nextToken);
                         }
                     }
+                    break;
+
+                default:
+                    Node importSpec = parseImportSpec();
+                    if (importSpec == null) {
+                        throw new Exceptions.ParsingException(nextToken);
+                    }
+                    t.addNode(importSpec);
+                    nextToken = lexer.getToken();
             }
-            //Node importSpec = 
+
+            return t;
         }
         return null;
     }
-    
+
     private Node parseImportSpec() throws Exception {
-        
+
         Node t = new Node("ImportSpec");
-        
-        switch(nextToken.getType()) {
+
+        switch (nextToken.getType()) {
             case OPERATOR:
-                if(String.valueOf(nextToken.getValue()).matches(Operator.l_dot)) {      //Create leaf
+                if (String.valueOf(nextToken.getValue()).matches(Operator.l_dot)) {
                     t.addNode(new Leaf(nextToken));
                     nextToken = lexer.getToken();
-                    Node packageName = parsePackageName();
-                    
-                    if(packageName != null) {
-                        nextToken = lexer.getToken();
-                        Node importPath = parseImportPath();
-                        
-                        if(importPath != null) {
-                            t.addNode(packageName);
-                            t.addNode(importPath);
-                            nextToken = lexer.getToken();
-                        } else {
-                            packageName.setName("ImportPath");
-                            t.addNode(packageName);
-                        }
-                        
+
+                    Node importPath = parseImportPath();
+
+                    if (importPath != null) {
+                        t.addNode(importPath);
                         return t;
+                    } else {
+                        throw new Exceptions.ParsingException(nextToken);
                     }
                 }
+                break;
+
+            case IDENTIFIER:
+                Node packageName = parsePackageName();
+                if (packageName != null) {
+                    t.addNode(packageName);
+                }
+
+                Node importPath = parseImportPath();
+
+                if (importPath != null) {
+                    t.addNode(importPath);
+                    return t;
+                } else {
+                    throw new Exceptions.ParsingException(nextToken);
+                }
         }
-        
-        return null;
+
+        Node importPath = parseImportPath();
+
+        if (importPath != null) {
+            t.addNode(importPath);
+            return t;
+        } else {
+            return null;
+        }
     }
-    
+
     private Node parseImportPath() throws Exception {
 
         Node t = new Node("ImportPath");
-        
+
         switch (nextToken.getType()) {
-            case IDENTIFIER:
+            case STRING_LITERAL:
                 t.addNode(new Leaf(nextToken));
                 nextToken = lexer.getToken();
                 return t;

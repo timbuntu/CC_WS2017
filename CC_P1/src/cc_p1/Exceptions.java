@@ -20,8 +20,8 @@ public class Exceptions {
     
     public static class ParsingException extends Exception {
         
-        public ParsingException(Object tokenValue) {
-            super(" Unexpected token \""+ tokenValue.toString() + "\"");
+        public ParsingException(Token token) {
+            super(" Unexpected token \""+ token.getValue().toString() + "\" of type \"" + token.getType().toString() + "\"");
         }
     }
 }

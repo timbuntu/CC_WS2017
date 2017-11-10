@@ -107,4 +107,57 @@ public class ParserTest {
         Parser parser = new Parser(lexer, symbolTable);
         parser.parse();
     }
+    
+    @Test(expected = Exceptions.ParsingException.class)
+    public void testBadImportFile2() throws Exception {
+        System.out.println("testBadImportFile2");
+        String file = "/resources/bad_import_2.go";
+        List<String> symbolTable = new ArrayList<>();
+
+        InputStream fileStream = this.getClass().getResourceAsStream(file);
+        Lexer lexer = new Lexer(fileStream, symbolTable);
+
+        Parser parser = new Parser(lexer, symbolTable);
+        parser.parse();
+    }
+    
+    //Should be good when parsing functions is implemented
+    @Test(expected = Exceptions.ParsingException.class)
+    public void testBadImportFile3() throws Exception {
+        System.out.println("testBadImportFile3");
+        String file = "/resources/bad_import_3.go";
+        List<String> symbolTable = new ArrayList<>();
+
+        InputStream fileStream = this.getClass().getResourceAsStream(file);
+        Lexer lexer = new Lexer(fileStream, symbolTable);
+
+        Parser parser = new Parser(lexer, symbolTable);
+        parser.parse();
+    }
+    
+    @Test(expected = Exceptions.ParsingException.class)
+    public void testBadImportFile4() throws Exception {
+        System.out.println("testBadImportFile4");
+        String file = "/resources/bad_import_4.go";
+        List<String> symbolTable = new ArrayList<>();
+
+        InputStream fileStream = this.getClass().getResourceAsStream(file);
+        Lexer lexer = new Lexer(fileStream, symbolTable);
+
+        Parser parser = new Parser(lexer, symbolTable);
+        parser.parse();
+    }
+    
+    @Test(expected = Exceptions.ParsingException.class)
+    public void testBadImportFile5() throws Exception {
+        System.out.println("testBadImportFile5");
+        String file = "/resources/bad_import_5.go";
+        List<String> symbolTable = new ArrayList<>();
+
+        InputStream fileStream = this.getClass().getResourceAsStream(file);
+        Lexer lexer = new Lexer(fileStream, symbolTable);
+
+        Parser parser = new Parser(lexer, symbolTable);
+        parser.parse();
+    }
 }

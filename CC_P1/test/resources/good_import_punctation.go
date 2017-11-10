@@ -1,4 +1,6 @@
-package foo ;
+package foo
 
-import
- ."errors"
+import (
+ . "errors" ;
+ bar "baz" ;
+)
