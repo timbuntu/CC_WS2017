@@ -16,6 +16,7 @@ public class Keyword {
     // keywords
     public final static String k_package = "^package$";
     public final static String k_import = "^[Ii]mport$";
+    public final static String k_func = "^func$";
     public final static String k_var = "^var$";
     public final static String k_const = "^const$";
 

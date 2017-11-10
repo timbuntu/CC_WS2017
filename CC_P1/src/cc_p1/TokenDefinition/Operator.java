@@ -14,7 +14,7 @@ import java.lang.reflect.Field;
 public class Operator {
 
     public final static String l_left_bracket = "^\\($";
-    public final static String l_right_bracket = "^\\)$";     //TODO: "^\\);*$"
+    public final static String l_right_bracket = "^\\);*$";
     public final static String l_semicolon = "^;$";
     public final static String l_dot = "^\\.$";
     public final static String l_comma = "^,$";

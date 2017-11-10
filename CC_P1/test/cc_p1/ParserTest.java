@@ -121,7 +121,6 @@ public class ParserTest {
         parser.parse();
     }
     
-    //Should be good when parsing functions is implemented
     @Test(expected = Exceptions.ParsingException.class)
     public void testBadImportFile3() throws Exception {
         System.out.println("testBadImportFile3");

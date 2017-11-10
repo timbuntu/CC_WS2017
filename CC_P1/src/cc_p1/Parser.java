@@ -42,12 +42,21 @@ public class Parser {
         }
 
         t.addNode(pkg);
-
+        
+        //TODO: Put in while
         Node imprt = parseImportDecl();
         if (imprt != null) {
             t.addNode(imprt);
         }
-
+        
+        Node topLevelDecl = null;
+        while((topLevelDecl = parseTopLevelDecl()) != null) {
+            t.addNode(topLevelDecl);
+        }
+        
+        if(nextToken.getType() != Token.TokenType.EOF)
+            throw new Exceptions.ParsingException(nextToken);
+        
         return t;
     }
 
@@ -186,6 +195,54 @@ public class Parser {
 
         switch (nextToken.getType()) {
             case STRING_LITERAL:
+                t.addNode(new Leaf(nextToken));
+                nextToken = lexer.getToken();
+                return t;
+        }
+
+        return null;
+    }
+    
+    private Node parseTopLevelDecl() throws Exception {
+        
+        Node t = new Node("TopLevelDecl");
+        
+        //TODO: implement Declaration + MethodDecl
+        Node functionDecl = null;
+        if((functionDecl = parseFunctionDecl()) != null) {
+            t.addNode(functionDecl);
+            return t;
+        }
+        
+        return null;
+            
+    }
+    
+    private Node parseFunctionDecl() throws Exception {
+        
+        Node t = new Node("FunctionDecl");
+        
+        if(nextToken.getType() == Token.TokenType.KEYWORD && String.valueOf(nextToken.getValue()).matches(Keyword.k_func)) {
+            t.addNode(new Leaf(nextToken));
+            nextToken = lexer.getToken();
+            
+            Node functionName = parseFunctionName();
+            if(functionName == null) {
+                throw new Exceptions.ParsingException(nextToken);
+            } else {
+                return t;
+            }
+        }
+        
+        return null;
+    }
+    
+    private Node parseFunctionName() throws Exception {
+
+        Node t = new Node("FunctionName");
+
+        switch (nextToken.getType()) {
+            case IDENTIFIER:
                 t.addNode(new Leaf(nextToken));
                 nextToken = lexer.getToken();
                 return t;
