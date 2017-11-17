@@ -1,9 +1,9 @@
 # CC_WS2017
 
 
-To build this project use "ant default"
+To build this project use `ant default`
 
-Or import CC_P1`into netbeans an run clean build`.
+Or import CC_P1 into netbeans an run `clean build`.
 
 Test files are located under `CC_P1/test/resources`.
 ```
