@@ -159,4 +159,17 @@ public class ParserTest {
         Parser parser = new Parser(lexer, symbolTable);
         parser.parse();
     }
+    
+    @Test
+    public void testGoodFuncDecl() throws Exception {
+        System.out.println("testGoodFuncDecl");
+        String file = "/resources/good_func_decl.go";
+        List<String> symbolTable = new ArrayList<>();
+
+        InputStream fileStream = this.getClass().getResourceAsStream(file);
+        Lexer lexer = new Lexer(fileStream, symbolTable);
+
+        Parser parser = new Parser(lexer, symbolTable);
+        parser.parse();
+    }
 }
