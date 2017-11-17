@@ -1,7 +1,7 @@
 # Grammar Defintion
 
 ```
-SourceFile       = PackageClause ";" { ImportDecl ";" } { TopLevelDecl }
+SourceFile       = PackageClause { ImportDecl } { TopLevelDecl }
 ```
 
 ## Package Declaration
@@ -14,7 +14,7 @@ PackageName    = identifier .
 ## Import Declaration
 
 ```
-ImportDecl       = "import" ( ImportSpec | "(" { ImportSpec ";" } ")" ) .
+ImportDecl       = "import" ( ImportSpec | "(" { ImportSpec " ;" } ")" ) .
 ImportSpec       = [ "." | PackageName ] ImportPath .
 ImportPath       = string_lit .
 ```
