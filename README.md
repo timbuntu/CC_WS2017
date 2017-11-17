@@ -1,7 +1,7 @@
 # CC_WS2017
 
 
-To build this project use `ant default`
+To build this project use `ant default` inside the CC\_P1 folder.
 
 Or import CC_P1 into netbeans an run `clean build`.
 
