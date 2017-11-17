@@ -45,8 +45,9 @@ public class Parser {
         
         //TODO: Put in while
         Node imprt = parseImportDecl();
-        if (imprt != null) {
+        while (imprt != null) {
             t.addNode(imprt);
+            imprt = parseImportDecl();
         }
         
         Node topLevelDecl = null;
@@ -230,6 +231,7 @@ public class Parser {
             if(functionName == null) {
                 throw new Exceptions.ParsingException(nextToken);
             } else {
+                t.addNode(functionName);
                 return t;
             }
         }
