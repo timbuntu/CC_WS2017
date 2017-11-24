@@ -26,3 +26,4 @@ hs_err_pid*
 *.swp
 /CC_P1/build/
 /CC_P1/dist/
+/CC_P2/nbproject/private/
