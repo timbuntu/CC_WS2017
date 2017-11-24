@@ -4,8 +4,8 @@ using namespace std;
 // global value for int tokens
 int yylval = 0;
 typedef enum {
-	EQ=0, NE, PLUS, MINUS, SEMICOLON,
-	PRINT=100, WHILE, IDENT,
+	EQ=0, NE, PLUS, MINUS, SEMICOLON, L_PAREN, R_PAREN, L_CURLY, R_CURLY, QUOTE,
+	PACKAGE=100, IMPORT, IDENT, FUNC,
 	NUMBER=200, STRING,
 	UNKNOWN=999, FINISHED=999999 } tokenType;
 %}
@@ -18,8 +18,14 @@ letter		[a-zA-Z]
 "+"		{ return PLUS; }
 "-"		{ return MINUS; }
 ";"		{ return SEMICOLON; }
-"print"		{ return PRINT; }
-"while"		{ return WHILE; }
+"("     { return L_PAREN; }
+")"     { return R_PAREN; }
+"{"     { return L_CURLY; }
+"}"     { return R_CURLY; }
+"\""    { return QUOTE; }
+"package"		{ return PACKAGE; }
+"import"		{ return IMPORT; }
+"func"          { return FUNC; }
 {letter}({letter}|{digit})*	{ return IDENT; }
 {digit}+			{ yylval = atoi(yytext); return NUMBER; }
 [ \t\n\r]			/* skip whitespace */
