@@ -23,3 +23,9 @@ lexer_good_import.go
 ```
 
 To run this program use `java -jar "./CC_P1/dist/CC_P1.jar" CC_P1/test/resources/good_func_decl.go`
+
+# Team Members
+
+* Tim Christen
+* Marcel Gotthold
+* Matthias Greune
