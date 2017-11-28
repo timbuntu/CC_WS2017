@@ -54,7 +54,7 @@ build-lexer:
 	@if [ ! -d "build" ]; then \
 		mkdir build; \
 	fi
-	flex -o build/lex.yy.c lexer.l
+	flex -o build/lex.yy.c --header-file=build/lex.yy.h lexer.l
 	g++ build/lex.yy.c -o build/lex.out
 
 # build
