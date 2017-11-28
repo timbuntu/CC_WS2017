@@ -50,6 +50,13 @@ CP=cp
 CCADMIN=CCadmin
 
 
+build-lexer:
+	@if [ ! -d "build" ]; then \
+		mkdir build; \
+	fi
+	flex -o build/lex.yy.c sample.l 
+	g++ build/lex.yy.c -o build/lex.out
+
 # build
 build: .build-post
 
