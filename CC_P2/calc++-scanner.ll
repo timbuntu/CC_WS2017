@@ -34,6 +34,9 @@ static yy::location loc;
 id    [a-zA-Z][a-zA-Z_0-9]*
 int   [0-9]+
 blank [ \t]
+digit       [0-9]
+letter      [a-zA-Z]
+string_lit  ^[\"`][^\"']*[\"`]$
 
 %{
   // Code run each time a pattern is matched.
@@ -57,6 +60,15 @@ blank [ \t]
 ")"      return yy::calcxx_parser::make_RPAREN(loc);
 ":="     return yy::calcxx_parser::make_ASSIGN(loc);
 
+"!="         return yy::calcxx_parser::make_NEQUAL(loc); 
+"="      return yy::calcxx_parser::make_EQUAL(loc); 
+";"      return yy::calcxx_parser::make_SEMIC(loc); 
+"{"      return yy::calcxx_parser::make_LCURLY(loc); 
+"}"      return yy::calcxx_parser::make_RCURLY(loc); 
+"package"        return yy::calcxx_parser::make_PACKAGE(loc); 
+"import"         return yy::calcxx_parser::make_IMPORT(loc); 
+"func"           return yy::calcxx_parser::make_FUNC(loc); 
+
 
 {int}      {
   errno = 0;
@@ -66,6 +78,7 @@ blank [ \t]
   return yy::calcxx_parser::make_NUMBER(n, loc);
 }
 
+{string_lit}       return yy::calcxx_parser::make_STRING(yytext, loc);
 {id}       return yy::calcxx_parser::make_IDENTIFIER(yytext, loc);
 .          driver.error (loc, "invalid character");
 <<EOF>>    return yy::calcxx_parser::make_END(loc);

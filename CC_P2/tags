@@ -1,0 +1,305 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+CALCXX_DRIVER_HH	calc++-driver.hh	2;"	d
+CC	Makefile	/^CC=clang++$/;"	m
+HEADERS	Makefile	/^HEADERS=calc++-parser.hh calc++-scanner.hh$/;"	m
+LEX	Makefile	/^LEX=flex$/;"	m
+TOK_ASSIGN	calc++-parser.hh	/^        TOK_ASSIGN = 258,$/;"	e	enum:yy::calcxx_parser::token::yytokentype
+TOK_END	calc++-parser.hh	/^        TOK_END = 0,$/;"	e	enum:yy::calcxx_parser::token::yytokentype
+TOK_EQUAL	calc++-parser.hh	/^        TOK_EQUAL = 268,$/;"	e	enum:yy::calcxx_parser::token::yytokentype
+TOK_FUNC	calc++-parser.hh	/^        TOK_FUNC = 272,$/;"	e	enum:yy::calcxx_parser::token::yytokentype
+TOK_IDENTIFIER	calc++-parser.hh	/^        TOK_IDENTIFIER = 273,$/;"	e	enum:yy::calcxx_parser::token::yytokentype
+TOK_IMPORT	calc++-parser.hh	/^        TOK_IMPORT = 271,$/;"	e	enum:yy::calcxx_parser::token::yytokentype
+TOK_LCURLY	calc++-parser.hh	/^        TOK_LCURLY = 265,$/;"	e	enum:yy::calcxx_parser::token::yytokentype
+TOK_LPAREN	calc++-parser.hh	/^        TOK_LPAREN = 263,$/;"	e	enum:yy::calcxx_parser::token::yytokentype
+TOK_MINUS	calc++-parser.hh	/^        TOK_MINUS = 259,$/;"	e	enum:yy::calcxx_parser::token::yytokentype
+TOK_NEQUAL	calc++-parser.hh	/^        TOK_NEQUAL = 269,$/;"	e	enum:yy::calcxx_parser::token::yytokentype
+TOK_NUMBER	calc++-parser.hh	/^        TOK_NUMBER = 275$/;"	e	enum:yy::calcxx_parser::token::yytokentype
+TOK_PACKAGE	calc++-parser.hh	/^        TOK_PACKAGE = 270,$/;"	e	enum:yy::calcxx_parser::token::yytokentype
+TOK_PLUS	calc++-parser.hh	/^        TOK_PLUS = 260,$/;"	e	enum:yy::calcxx_parser::token::yytokentype
+TOK_RCURLY	calc++-parser.hh	/^        TOK_RCURLY = 266,$/;"	e	enum:yy::calcxx_parser::token::yytokentype
+TOK_RPAREN	calc++-parser.hh	/^        TOK_RPAREN = 264,$/;"	e	enum:yy::calcxx_parser::token::yytokentype
+TOK_SEMIC	calc++-parser.hh	/^        TOK_SEMIC = 267,$/;"	e	enum:yy::calcxx_parser::token::yytokentype
+TOK_SLASH	calc++-parser.hh	/^        TOK_SLASH = 262,$/;"	e	enum:yy::calcxx_parser::token::yytokentype
+TOK_STAR	calc++-parser.hh	/^        TOK_STAR = 261,$/;"	e	enum:yy::calcxx_parser::token::yytokentype
+TOK_STRING	calc++-parser.hh	/^        TOK_STRING = 274,$/;"	e	enum:yy::calcxx_parser::token::yytokentype
+YACC	Makefile	/^YACC=bison$/;"	m
+YFLAGS	Makefile	/^YFLAGS=-v -d$/;"	m
+YYABORT	calc++-parser.cc	136;"	d	file:
+YYACCEPT	calc++-parser.cc	135;"	d	file:
+YYASSERT	calc++-parser.hh	61;"	d
+YYCASE_	calc++-parser.cc	880;"	d	file:
+YYCASE_	calc++-parser.cc	890;"	d	file:
+YYCDEBUG	calc++-parser.cc	125;"	d	file:
+YYCDEBUG	calc++-parser.cc	99;"	d	file:
+YYDEBUG	calc++-parser.hh	120;"	d
+YYERROR	calc++-parser.cc	137;"	d	file:
+YYLLOC_DEFAULT	calc++-parser.cc	77;"	d	file:
+YYRECOVERING	calc++-parser.cc	138;"	d	file:
+YYRHSLOC	calc++-parser.cc	71;"	d	file:
+YYUSE	calc++-parser.cc	93;"	d	file:
+YYUSE	calc++-parser.hh	94;"	d
+YYUSE	calc++-parser.hh	96;"	d
+YY_	calc++-parser.cc	63;"	d	file:
+YY_	calc++-parser.cc	67;"	d	file:
+YY_ATTRIBUTE	calc++-parser.hh	69;"	d
+YY_ATTRIBUTE	calc++-parser.hh	71;"	d
+YY_ATTRIBUTE_PURE	calc++-parser.hh	/^    debug_level_type debug_level () const YY_ATTRIBUTE_PURE;$/;"	m	class:yy::calcxx_parser
+YY_ATTRIBUTE_PURE	calc++-parser.hh	/^    std::ostream& debug_stream () const YY_ATTRIBUTE_PURE;$/;"	m	class:yy::calcxx_parser
+YY_ATTRIBUTE_PURE	calc++-parser.hh	76;"	d
+YY_ATTRIBUTE_UNUSED	calc++-parser.hh	80;"	d
+YY_DECL	calc++-driver.hh	8;"	d
+YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN	calc++-parser.hh	101;"	d
+YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN	calc++-parser.hh	111;"	d
+YY_IGNORE_MAYBE_UNINITIALIZED_END	calc++-parser.hh	105;"	d
+YY_IGNORE_MAYBE_UNINITIALIZED_END	calc++-parser.hh	112;"	d
+YY_INITIAL_VALUE	calc++-parser.hh	108;"	d
+YY_INITIAL_VALUE	calc++-parser.hh	115;"	d
+YY_NULLPTR	calc++-parser.cc	40;"	d	file:
+YY_NULLPTR	calc++-parser.cc	42;"	d	file:
+YY_NULLPTR	position.hh	47;"	d
+YY_NULLPTR	position.hh	49;"	d
+YY_REDUCE_PRINT	calc++-parser.cc	111;"	d	file:
+YY_REDUCE_PRINT	calc++-parser.cc	127;"	d	file:
+YY_STACK_PRINT	calc++-parser.cc	117;"	d	file:
+YY_STACK_PRINT	calc++-parser.cc	128;"	d	file:
+YY_SYMBOL_PRINT	calc++-parser.cc	101;"	d	file:
+YY_SYMBOL_PRINT	calc++-parser.cc	126;"	d	file:
+YY_YY_CALC_PARSER_HH_INCLUDED	calc++-parser.hh	41;"	d
+YY_YY_LOCATION_HH_INCLUDED	location.hh	39;"	d
+YY_YY_POSITION_HH_INCLUDED	position.hh	39;"	d
+YY_YY_STACK_HH_INCLUDED	stack.hh	39;"	d
+_Noreturn	calc++-parser.hh	86;"	d
+_Noreturn	calc++-parser.hh	88;"	d
+add_	position.hh	/^    static unsigned int add_ (unsigned int lhs, int rhs, unsigned int min)$/;"	f	class:yy::position
+as	calc++-parser.hh	/^    as () const$/;"	f	struct:yy::variant
+as	calc++-parser.hh	/^    as ()$/;"	f	struct:yy::variant
+basic_symbol	calc++-parser.hh	/^    struct basic_symbol : Base$/;"	s	class:yy::calcxx_parser
+basic_symbol	calc++-parser.hh	/^  calcxx_parser::basic_symbol<Base>::basic_symbol ()$/;"	f	class:yy::calcxx_parser::basic_symbol
+basic_symbol	calc++-parser.hh	/^  calcxx_parser::basic_symbol<Base>::basic_symbol (const basic_symbol& other)$/;"	f	class:yy::calcxx_parser::basic_symbol
+basic_symbol	calc++-parser.hh	/^  calcxx_parser::basic_symbol<Base>::basic_symbol (typename Base::kind_type t, const int v, const location_type& l)$/;"	f	class:yy::calcxx_parser::basic_symbol
+basic_symbol	calc++-parser.hh	/^  calcxx_parser::basic_symbol<Base>::basic_symbol (typename Base::kind_type t, const location_type& l)$/;"	f	class:yy::calcxx_parser::basic_symbol
+basic_symbol	calc++-parser.hh	/^  calcxx_parser::basic_symbol<Base>::basic_symbol (typename Base::kind_type t, const semantic_type& v, const location_type& l)$/;"	f	class:yy::calcxx_parser::basic_symbol
+basic_symbol	calc++-parser.hh	/^  calcxx_parser::basic_symbol<Base>::basic_symbol (typename Base::kind_type t, const std::string v, const location_type& l)$/;"	f	class:yy::calcxx_parser::basic_symbol
+begin	location.hh	/^    position begin;$/;"	m	class:yy::location
+begin	stack.hh	/^    begin () const$/;"	f	class:yy::stack
+build	calc++-parser.hh	/^    build ()$/;"	f	struct:yy::variant
+build	calc++-parser.hh	/^    build (const T& t)$/;"	f	struct:yy::variant
+by_state	calc++-parser.cc	/^  calcxx_parser::by_state::by_state ()$/;"	f	class:yy::calcxx_parser::by_state
+by_state	calc++-parser.cc	/^  calcxx_parser::by_state::by_state (const by_state& other)$/;"	f	class:yy::calcxx_parser::by_state
+by_state	calc++-parser.cc	/^  calcxx_parser::by_state::by_state (state_type s)$/;"	f	class:yy::calcxx_parser::by_state
+by_state	calc++-parser.hh	/^    struct by_state$/;"	s	class:yy::calcxx_parser
+by_type	calc++-parser.hh	/^    struct by_type$/;"	s	class:yy::calcxx_parser
+by_type	calc++-parser.hh	/^  calcxx_parser::by_type::by_type ()$/;"	f	class:yy::calcxx_parser::by_type
+by_type	calc++-parser.hh	/^  calcxx_parser::by_type::by_type (const by_type& other)$/;"	f	class:yy::calcxx_parser::by_type
+by_type	calc++-parser.hh	/^  calcxx_parser::by_type::by_type (token_type t)$/;"	f	class:yy::calcxx_parser::by_type
+calcxx_driver	calc++-driver.cc	/^calcxx_driver::calcxx_driver ()$/;"	f	class:calcxx_driver
+calcxx_driver	calc++-driver.hh	/^class calcxx_driver$/;"	c
+calcxx_parser	calc++-parser.cc	/^  calcxx_parser::calcxx_parser (calcxx_driver& driver_yyarg)$/;"	f	class:yy::calcxx_parser
+calcxx_parser	calc++-parser.hh	/^  class calcxx_parser$/;"	c	namespace:yy
+clear	calc++-parser.cc	/^  calcxx_parser::by_state::clear ()$/;"	f	class:yy::calcxx_parser::by_state
+clear	calc++-parser.hh	/^  calcxx_parser::basic_symbol<Base>::clear ()$/;"	f	class:yy::calcxx_parser::basic_symbol
+clear	calc++-parser.hh	/^  calcxx_parser::by_type::clear ()$/;"	f	class:yy::calcxx_parser::by_type
+clear	stack.hh	/^    clear ()$/;"	f	class:yy::stack
+column	position.hh	/^    unsigned int column;$/;"	m	class:yy::position
+columns	location.hh	/^    void columns (int count = 1)$/;"	f	class:yy::location
+columns	position.hh	/^    void columns (int count = 1)$/;"	f	class:yy::position
+const_iterator	stack.hh	/^    typedef typename S::const_reverse_iterator const_iterator;$/;"	t	class:yy::stack
+copy	calc++-parser.hh	/^    copy (const self_type& other)$/;"	f	struct:yy::variant
+debug_level	calc++-parser.cc	/^  calcxx_parser::debug_level () const$/;"	f	class:yy::calcxx_parser
+debug_level_type	calc++-parser.hh	/^    typedef int debug_level_type;$/;"	t	class:yy::calcxx_parser
+debug_stream	calc++-parser.cc	/^  calcxx_parser::debug_stream () const$/;"	f	class:yy::calcxx_parser
+destroy	calc++-parser.hh	/^    destroy ()$/;"	f	struct:yy::variant
+driver	calc++-parser.hh	/^    calcxx_driver& driver;$/;"	m	class:yy::calcxx_parser
+dummy1	calc++-parser.hh	/^      char dummy1[sizeof(int)];$/;"	m	union:yy::calcxx_parser::union_type
+dummy2	calc++-parser.hh	/^      char dummy2[sizeof(std::string)];$/;"	m	union:yy::calcxx_parser::union_type
+empty	calc++-parser.hh	/^  calcxx_parser::basic_symbol<Base>::empty () const$/;"	f	class:yy::calcxx_parser::basic_symbol
+empty_state	calc++-parser.hh	/^      enum { empty_state = -1 };$/;"	e	enum:yy::calcxx_parser::by_state::__anon3
+empty_symbol	calc++-parser.hh	/^    enum { empty_symbol = -2 };$/;"	e	enum:yy::calcxx_parser::__anon2
+end	location.hh	/^    position end;$/;"	m	class:yy::location
+end	stack.hh	/^    end () const$/;"	f	class:yy::stack
+error	calc++-driver.cc	/^calcxx_driver::error (const std::string& m)$/;"	f	class:calcxx_driver
+error	calc++-driver.cc	/^calcxx_driver::error (const yy::location& l, const std::string& m)$/;"	f	class:calcxx_driver
+error	calc++-parser.cc	/^  calcxx_parser::error (const syntax_error& yyexc)$/;"	f	class:yy::calcxx_parser
+error	calc++-parser.cc	/^yy::calcxx_parser::error (const location_type& l,$/;"	f	class:yy::calcxx_parser
+file	calc++-driver.hh	/^  std::string file;$/;"	m	class:calcxx_driver
+filename	position.hh	/^    std::string* filename;$/;"	m	class:yy::position
+initialize	location.hh	/^    void initialize (std::string* f = YY_NULLPTR,$/;"	f	class:yy::location
+initialize	position.hh	/^    void initialize (std::string* fn = YY_NULLPTR,$/;"	f	class:yy::position
+iterator	stack.hh	/^    typedef typename S::reverse_iterator iterator;$/;"	t	class:yy::stack
+kind_type	calc++-parser.hh	/^      typedef state_type kind_type;$/;"	t	struct:yy::calcxx_parser::by_state
+kind_type	calc++-parser.hh	/^      typedef token_type kind_type;$/;"	t	struct:yy::calcxx_parser::by_type
+line	position.hh	/^    unsigned int line;$/;"	m	class:yy::position
+lines	location.hh	/^    void lines (int count = 1)$/;"	f	class:yy::location
+lines	position.hh	/^    void lines (int count = 1)$/;"	f	class:yy::position
+location	calc++-parser.hh	/^      location_type location;$/;"	m	struct:yy::calcxx_parser::basic_symbol
+location	calc++-parser.hh	/^      location_type location;$/;"	m	struct:yy::calcxx_parser::syntax_error
+location	location.hh	/^    explicit location (const position& p = position ())$/;"	f	class:yy::location
+location	location.hh	/^    explicit location (std::string* f,$/;"	f	class:yy::location
+location	location.hh	/^    location (const position& b, const position& e)$/;"	f	class:yy::location
+location	location.hh	/^  class location$/;"	c	namespace:yy
+location_type	calc++-parser.hh	/^    typedef location location_type;$/;"	t	class:yy::calcxx_parser
+main	calc++.cc	/^main (int argc, char *argv[])$/;"	f
+make_ASSIGN	calc++-parser.hh	/^  calcxx_parser::make_ASSIGN (const location_type& l)$/;"	f	class:yy::calcxx_parser
+make_END	calc++-parser.hh	/^  calcxx_parser::make_END (const location_type& l)$/;"	f	class:yy::calcxx_parser
+make_EQUAL	calc++-parser.hh	/^  calcxx_parser::make_EQUAL (const location_type& l)$/;"	f	class:yy::calcxx_parser
+make_FUNC	calc++-parser.hh	/^  calcxx_parser::make_FUNC (const location_type& l)$/;"	f	class:yy::calcxx_parser
+make_IDENTIFIER	calc++-parser.hh	/^  calcxx_parser::make_IDENTIFIER (const std::string& v, const location_type& l)$/;"	f	class:yy::calcxx_parser
+make_IMPORT	calc++-parser.hh	/^  calcxx_parser::make_IMPORT (const location_type& l)$/;"	f	class:yy::calcxx_parser
+make_LCURLY	calc++-parser.hh	/^  calcxx_parser::make_LCURLY (const location_type& l)$/;"	f	class:yy::calcxx_parser
+make_LPAREN	calc++-parser.hh	/^  calcxx_parser::make_LPAREN (const location_type& l)$/;"	f	class:yy::calcxx_parser
+make_MINUS	calc++-parser.hh	/^  calcxx_parser::make_MINUS (const location_type& l)$/;"	f	class:yy::calcxx_parser
+make_NEQUAL	calc++-parser.hh	/^  calcxx_parser::make_NEQUAL (const location_type& l)$/;"	f	class:yy::calcxx_parser
+make_NUMBER	calc++-parser.hh	/^  calcxx_parser::make_NUMBER (const int& v, const location_type& l)$/;"	f	class:yy::calcxx_parser
+make_PACKAGE	calc++-parser.hh	/^  calcxx_parser::make_PACKAGE (const location_type& l)$/;"	f	class:yy::calcxx_parser
+make_PLUS	calc++-parser.hh	/^  calcxx_parser::make_PLUS (const location_type& l)$/;"	f	class:yy::calcxx_parser
+make_RCURLY	calc++-parser.hh	/^  calcxx_parser::make_RCURLY (const location_type& l)$/;"	f	class:yy::calcxx_parser
+make_RPAREN	calc++-parser.hh	/^  calcxx_parser::make_RPAREN (const location_type& l)$/;"	f	class:yy::calcxx_parser
+make_SEMIC	calc++-parser.hh	/^  calcxx_parser::make_SEMIC (const location_type& l)$/;"	f	class:yy::calcxx_parser
+make_SLASH	calc++-parser.hh	/^  calcxx_parser::make_SLASH (const location_type& l)$/;"	f	class:yy::calcxx_parser
+make_STAR	calc++-parser.hh	/^  calcxx_parser::make_STAR (const location_type& l)$/;"	f	class:yy::calcxx_parser
+make_STRING	calc++-parser.hh	/^  calcxx_parser::make_STRING (const std::string& v, const location_type& l)$/;"	f	class:yy::calcxx_parser
+move	calc++-parser.cc	/^  calcxx_parser::by_state::move (by_state& that)$/;"	f	class:yy::calcxx_parser::by_state
+move	calc++-parser.hh	/^    move (self_type& other)$/;"	f	struct:yy::variant
+move	calc++-parser.hh	/^  calcxx_parser::basic_symbol<Base>::move (basic_symbol& s)$/;"	f	class:yy::calcxx_parser::basic_symbol
+move	calc++-parser.hh	/^  calcxx_parser::by_type::move (by_type& that)$/;"	f	class:yy::calcxx_parser::by_type
+operator !=	location.hh	/^  operator!= (const location& loc1, const location& loc2)$/;"	f	namespace:yy
+operator !=	position.hh	/^  operator!= (const position& pos1, const position& pos2)$/;"	f	namespace:yy
+operator +	location.hh	/^  inline location operator+ (location res, const location& end)$/;"	f	namespace:yy
+operator +	location.hh	/^  inline location operator+ (location res, int width)$/;"	f	namespace:yy
+operator +	position.hh	/^  operator+ (position res, int width)$/;"	f	namespace:yy
+operator +=	location.hh	/^  inline location& operator+= (location& res, const location& end)$/;"	f	namespace:yy
+operator +=	location.hh	/^  inline location& operator+= (location& res, int width)$/;"	f	namespace:yy
+operator +=	position.hh	/^  operator+= (position& res, int width)$/;"	f	namespace:yy
+operator -	location.hh	/^  inline location operator- (location res, int width)$/;"	f	namespace:yy
+operator -	position.hh	/^  operator- (position res, int width)$/;"	f	namespace:yy
+operator -=	location.hh	/^  inline location& operator-= (location& res, int width)$/;"	f	namespace:yy
+operator -=	position.hh	/^  operator-= (position& res, int width)$/;"	f	namespace:yy
+operator <<	location.hh	/^  operator<< (std::basic_ostream<YYChar>& ostr, const location& loc)$/;"	f	namespace:yy
+operator <<	position.hh	/^  operator<< (std::basic_ostream<YYChar>& ostr, const position& pos)$/;"	f	namespace:yy
+operator =	calc++-parser.cc	/^  calcxx_parser::stack_symbol_type::operator= (const stack_symbol_type& that)$/;"	f	class:yy::calcxx_parser::stack_symbol_type
+operator ==	location.hh	/^  operator== (const location& loc1, const location& loc2)$/;"	f	namespace:yy
+operator ==	position.hh	/^  operator== (const position& pos1, const position& pos2)$/;"	f	namespace:yy
+operator []	stack.hh	/^    operator [] (unsigned int i) const$/;"	f	class:yy::slice
+operator []	stack.hh	/^    operator[] (unsigned int i) const$/;"	f	class:yy::stack
+operator []	stack.hh	/^    operator[] (unsigned int i)$/;"	f	class:yy::stack
+parse	calc++-driver.cc	/^calcxx_driver::parse (const std::string &f)$/;"	f	class:calcxx_driver
+parse	calc++-parser.cc	/^  calcxx_parser::parse ()$/;"	f	class:yy::calcxx_parser
+pop	stack.hh	/^    pop (unsigned int n = 1)$/;"	f	class:yy::stack
+position	position.hh	/^    explicit position (std::string* f = YY_NULLPTR,$/;"	f	class:yy::position
+position	position.hh	/^  class position$/;"	c	namespace:yy
+push	stack.hh	/^    push (T& t)$/;"	f	class:yy::stack
+range_	stack.hh	/^    unsigned int range_;$/;"	m	class:yy::slice
+result	calc++-driver.hh	/^  int result;$/;"	m	class:calcxx_driver
+self_type	calc++-parser.hh	/^    typedef variant<S> self_type;$/;"	t	struct:yy::variant
+semantic_type	calc++-parser.hh	/^    typedef variant<sizeof(union_type)> semantic_type;$/;"	t	class:yy::calcxx_parser
+seq_	stack.hh	/^    S seq_;$/;"	m	class:yy::stack
+set_debug_level	calc++-parser.cc	/^  calcxx_parser::set_debug_level (debug_level_type l)$/;"	f	class:yy::calcxx_parser
+set_debug_stream	calc++-parser.cc	/^  calcxx_parser::set_debug_stream (std::ostream& o)$/;"	f	class:yy::calcxx_parser
+size	stack.hh	/^    size () const$/;"	f	class:yy::stack
+slice	stack.hh	/^    slice (const S& stack, unsigned int range)$/;"	f	class:yy::slice
+slice	stack.hh	/^  class slice$/;"	c	namespace:yy
+stack	stack.hh	/^    stack ()$/;"	f	class:yy::stack
+stack	stack.hh	/^    stack (unsigned int n)$/;"	f	class:yy::stack
+stack	stack.hh	/^  class stack$/;"	c	namespace:yy
+stack_	stack.hh	/^    const S& stack_;$/;"	m	class:yy::slice
+stack_symbol_type	calc++-parser.cc	/^  calcxx_parser::stack_symbol_type::stack_symbol_type ()$/;"	f	class:yy::calcxx_parser::stack_symbol_type
+stack_symbol_type	calc++-parser.cc	/^  calcxx_parser::stack_symbol_type::stack_symbol_type (state_type s, symbol_type& that)$/;"	f	class:yy::calcxx_parser::stack_symbol_type
+stack_symbol_type	calc++-parser.hh	/^    struct stack_symbol_type : basic_symbol<by_state>$/;"	s	class:yy::calcxx_parser
+stack_type	calc++-parser.hh	/^    typedef stack<stack_symbol_type> stack_type;$/;"	t	class:yy::calcxx_parser
+state	calc++-parser.hh	/^      state_type state;$/;"	m	struct:yy::calcxx_parser::by_state
+state_type	calc++-parser.hh	/^    typedef int state_type;$/;"	t	class:yy::calcxx_parser
+step	location.hh	/^    void step ()$/;"	f	class:yy::location
+super_type	calc++-parser.hh	/^      typedef Base super_type;$/;"	t	struct:yy::calcxx_parser::basic_symbol
+super_type	calc++-parser.hh	/^      typedef basic_symbol<by_state> super_type;$/;"	t	struct:yy::calcxx_parser::stack_symbol_type
+swap	calc++-parser.hh	/^    swap (self_type& other)$/;"	f	struct:yy::variant
+symbol_number_type	calc++-parser.hh	/^    typedef int symbol_number_type;$/;"	t	class:yy::calcxx_parser
+symbol_type	calc++-parser.hh	/^    typedef basic_symbol<by_type> symbol_type;$/;"	t	class:yy::calcxx_parser
+syntax_error	calc++-parser.hh	/^    struct syntax_error : std::runtime_error$/;"	s	class:yy::calcxx_parser
+syntax_error	calc++-parser.hh	/^  calcxx_parser::syntax_error::syntax_error (const location_type& l, const std::string& m)$/;"	f	class:yy::calcxx_parser::syntax_error
+token	calc++-parser.hh	/^    struct token$/;"	s	class:yy::calcxx_parser
+token	calc++-parser.hh	/^  calcxx_parser::by_type::token () const$/;"	f	class:yy::calcxx_parser::by_type
+token_number_type	calc++-parser.hh	/^    typedef unsigned char token_number_type;$/;"	t	class:yy::calcxx_parser
+token_type	calc++-parser.hh	/^    typedef token::yytokentype token_type;$/;"	t	class:yy::calcxx_parser
+trace_parsing	calc++-driver.hh	/^  bool trace_parsing;$/;"	m	class:calcxx_driver
+trace_scanning	calc++-driver.hh	/^  bool trace_scanning;$/;"	m	class:calcxx_driver
+type	calc++-parser.hh	/^      int type;$/;"	m	struct:yy::calcxx_parser::by_type
+type_get	calc++-parser.cc	/^  calcxx_parser::by_state::type_get () const$/;"	f	class:yy::calcxx_parser::by_state
+type_get	calc++-parser.hh	/^  calcxx_parser::by_type::type_get () const$/;"	f	class:yy::calcxx_parser::by_type
+union_type	calc++-parser.hh	/^    union union_type$/;"	u	class:yy::calcxx_parser
+value	calc++-parser.hh	/^      semantic_type value;$/;"	m	struct:yy::calcxx_parser::basic_symbol
+variables	calc++-driver.hh	/^  std::map<std::string, int> variables;$/;"	m	class:calcxx_driver
+variant	calc++-parser.hh	/^    variant ()$/;"	f	struct:yy::variant
+variant	calc++-parser.hh	/^    variant (const T& t)$/;"	f	struct:yy::variant
+variant	calc++-parser.hh	/^  struct variant$/;"	s	namespace:yy
+yy	calc++-parser.cc	/^namespace yy {$/;"	n	file:
+yy	calc++-parser.hh	/^namespace yy {$/;"	n
+yy	location.hh	/^namespace yy {$/;"	n
+yy	position.hh	/^namespace yy {$/;"	n
+yy	stack.hh	/^namespace yy {$/;"	n
+yy_destroy_	calc++-parser.cc	/^  calcxx_parser::yy_destroy_ (const char* yymsg, basic_symbol<Base>& yysym) const$/;"	f	class:yy::calcxx_parser
+yy_lr_goto_state_	calc++-parser.cc	/^  calcxx_parser::yy_lr_goto_state_ (state_type yystate, int yysym)$/;"	f	class:yy::calcxx_parser
+yy_pact_value_is_default_	calc++-parser.cc	/^  calcxx_parser::yy_pact_value_is_default_ (int yyvalue)$/;"	f	class:yy::calcxx_parser
+yy_print_	calc++-parser.cc	/^  calcxx_parser::yy_print_ (std::ostream& yyo,$/;"	f	class:yy::calcxx_parser
+yy_reduce_print_	calc++-parser.cc	/^  calcxx_parser::yy_reduce_print_ (int yyrule)$/;"	f	class:yy::calcxx_parser
+yy_table_value_is_error_	calc++-parser.cc	/^  calcxx_parser::yy_table_value_is_error_ (int yyvalue)$/;"	f	class:yy::calcxx_parser
+yyalign_me	calc++-parser.hh	/^      long double yyalign_me;$/;"	m	union:yy::variant::__anon1
+yyas_	calc++-parser.hh	/^    yyas_ () const$/;"	f	struct:yy::variant
+yyas_	calc++-parser.hh	/^    yyas_ ()$/;"	f	struct:yy::variant
+yybuffer_	calc++-parser.hh	/^    } yybuffer_;$/;"	m	struct:yy::variant	typeref:union:yy::variant::__anon1
+yycdebug_	calc++-parser.hh	/^    std::ostream* yycdebug_;$/;"	m	class:yy::calcxx_parser
+yycheck_	calc++-parser.cc	/^  calcxx_parser::yycheck_[] =$/;"	m	class:yy::calcxx_parser	file:
+yycheck_	calc++-parser.hh	/^  static const unsigned char yycheck_[];$/;"	m	class:yy::calcxx_parser
+yyclearin	calc++-parser.cc	133;"	d	file:
+yydebug_	calc++-parser.hh	/^    int yydebug_;$/;"	m	class:yy::calcxx_parser
+yydefact_	calc++-parser.cc	/^  calcxx_parser::yydefact_[] =$/;"	m	class:yy::calcxx_parser	file:
+yydefact_	calc++-parser.hh	/^  static const unsigned char yydefact_[];$/;"	m	class:yy::calcxx_parser
+yydefgoto_	calc++-parser.cc	/^  calcxx_parser::yydefgoto_[] =$/;"	m	class:yy::calcxx_parser	file:
+yydefgoto_	calc++-parser.hh	/^  static const signed char yydefgoto_[];$/;"	m	class:yy::calcxx_parser
+yyeof_	calc++-parser.hh	/^      yyeof_ = 0,$/;"	e	enum:yy::calcxx_parser::__anon4
+yyerrcode_	calc++-parser.hh	/^      yyerrcode_ = 256,$/;"	e	enum:yy::calcxx_parser::__anon4
+yyerrok	calc++-parser.cc	132;"	d	file:
+yyfinal_	calc++-parser.hh	/^      yyfinal_ = 3, \/\/\/< Termination state number.$/;"	e	enum:yy::calcxx_parser::__anon4
+yylast_	calc++-parser.hh	/^      yylast_ = 24,     \/\/\/< Last index in yytable_.$/;"	e	enum:yy::calcxx_parser::__anon4
+yynnts_	calc++-parser.hh	/^      yynnts_ = 5,  \/\/\/< Number of nonterminal symbols.$/;"	e	enum:yy::calcxx_parser::__anon4
+yyntokens_	calc++-parser.hh	/^      yyntokens_ = 21  \/\/\/< Number of tokens.$/;"	e	enum:yy::calcxx_parser::__anon4
+yypact_	calc++-parser.cc	/^  calcxx_parser::yypact_[] =$/;"	m	class:yy::calcxx_parser	file:
+yypact_	calc++-parser.hh	/^  static const signed char yypact_[];$/;"	m	class:yy::calcxx_parser
+yypact_ninf_	calc++-parser.cc	/^  const signed char calcxx_parser::yypact_ninf_ = -9;$/;"	m	class:yy::calcxx_parser	file:
+yypact_ninf_	calc++-parser.hh	/^    static const signed char yypact_ninf_;$/;"	m	class:yy::calcxx_parser
+yypgoto_	calc++-parser.cc	/^  calcxx_parser::yypgoto_[] =$/;"	m	class:yy::calcxx_parser	file:
+yypgoto_	calc++-parser.hh	/^  static const signed char yypgoto_[];$/;"	m	class:yy::calcxx_parser
+yypop_	calc++-parser.cc	/^  calcxx_parser::yypop_ (unsigned int n)$/;"	f	class:yy::calcxx_parser
+yypush_	calc++-parser.cc	/^  calcxx_parser::yypush_ (const char* m, stack_symbol_type& s)$/;"	f	class:yy::calcxx_parser
+yypush_	calc++-parser.cc	/^  calcxx_parser::yypush_ (const char* m, state_type s, symbol_type& sym)$/;"	f	class:yy::calcxx_parser
+yyr1_	calc++-parser.cc	/^  calcxx_parser::yyr1_[] =$/;"	m	class:yy::calcxx_parser	file:
+yyr1_	calc++-parser.hh	/^  static const unsigned char yyr1_[];$/;"	m	class:yy::calcxx_parser
+yyr2_	calc++-parser.cc	/^  calcxx_parser::yyr2_[] =$/;"	m	class:yy::calcxx_parser	file:
+yyr2_	calc++-parser.hh	/^  static const unsigned char yyr2_[];$/;"	m	class:yy::calcxx_parser
+yyraw	calc++-parser.hh	/^      char yyraw[S];$/;"	m	union:yy::variant::__anon1
+yyrline_	calc++-parser.cc	/^  calcxx_parser::yyrline_[] =$/;"	m	class:yy::calcxx_parser	file:
+yyrline_	calc++-parser.hh	/^  static const unsigned char yyrline_[];$/;"	m	class:yy::calcxx_parser
+yystack_	calc++-parser.hh	/^    stack_type yystack_;$/;"	m	class:yy::calcxx_parser
+yystack_print_	calc++-parser.cc	/^  calcxx_parser::yystack_print_ ()$/;"	f	class:yy::calcxx_parser
+yystos_	calc++-parser.cc	/^  calcxx_parser::yystos_[] =$/;"	m	class:yy::calcxx_parser	file:
+yystos_	calc++-parser.hh	/^  static const unsigned char yystos_[];$/;"	m	class:yy::calcxx_parser
+yysyntax_error_	calc++-parser.cc	/^  calcxx_parser::yysyntax_error_ (state_type yystate, const symbol_type& yyla) const$/;"	f	class:yy::calcxx_parser
+yytable_	calc++-parser.cc	/^  calcxx_parser::yytable_[] =$/;"	m	class:yy::calcxx_parser	file:
+yytable_	calc++-parser.hh	/^  static const unsigned char yytable_[];$/;"	m	class:yy::calcxx_parser
+yytable_ninf_	calc++-parser.cc	/^  const signed char calcxx_parser::yytable_ninf_ = -1;$/;"	m	class:yy::calcxx_parser	file:
+yytable_ninf_	calc++-parser.hh	/^    static const signed char yytable_ninf_;$/;"	m	class:yy::calcxx_parser
+yyterror_	calc++-parser.hh	/^      yyterror_ = 1,$/;"	e	enum:yy::calcxx_parser::__anon4
+yytname_	calc++-parser.cc	/^  const calcxx_parser::yytname_[] =$/;"	m	class:yy::calcxx_parser	file:
+yytname_	calc++-parser.hh	/^    static const char* const yytname_[];$/;"	m	class:yy::calcxx_parser
+yytnamerr_	calc++-parser.cc	/^  calcxx_parser::yytnamerr_ (const char *yystr)$/;"	f	class:yy::calcxx_parser
+yytokentype	calc++-parser.hh	/^      enum yytokentype$/;"	g	struct:yy::calcxx_parser::token
+yytranslate_	calc++-parser.hh	/^  calcxx_parser::yytranslate_ (token_type t)$/;"	f	class:yy::calcxx_parser
+yytypeid_	calc++-parser.hh	/^    const std::type_info *yytypeid_;$/;"	m	struct:yy::variant
+~basic_symbol	calc++-parser.hh	/^  calcxx_parser::basic_symbol<Base>::~basic_symbol ()$/;"	f	class:yy::calcxx_parser::basic_symbol
+~calcxx_driver	calc++-driver.cc	/^calcxx_driver::~calcxx_driver ()$/;"	f	class:calcxx_driver
+~calcxx_parser	calc++-parser.cc	/^  calcxx_parser::~calcxx_parser ()$/;"	f	class:yy::calcxx_parser
+~variant	calc++-parser.hh	/^    ~variant ()$/;"	f	struct:yy::variant

@@ -55,9 +55,18 @@ class calcxx_driver;
   SLASH   "/"
   LPAREN  "("
   RPAREN  ")"
+  LCURLY  "{"
+  RCURLY  "}"
+  SEMIC   ";"
+  EQUAL   "="
+  NEQUAL   "!="
+  PACKAGE "package"
+  IMPORT  "import"
+  FUNC    "func"
 ;
 
 %token <std::string> IDENTIFIER "identifier"
+%token <std::string> STRING "string"
 %token <int> NUMBER "number"
 %type  <int> exp
 
