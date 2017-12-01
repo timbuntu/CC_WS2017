@@ -63,6 +63,7 @@ class calcxx_driver;
   PACKAGE "package"
   IMPORT  "import"
   FUNC    "func"
+  DOT     "."
 ;
 
 %token <std::string> IDENTIFIER "identifier"
@@ -70,6 +71,7 @@ class calcxx_driver;
 %token <int> NUMBER "number"
 %type  <int> exp
 %type  <int> PackageName
+%type  <std::string> ImportPath
 
 %printer { yyoutput << $$; } <*>;
 
@@ -88,19 +90,34 @@ unit: SourceFile;
 %left "+" "-";
 %left "*" "/";
 SourceFile:
-  PackageClause
+  PackageClause ImportDeclS | PackageClause
+
 PackageClause:
   "package" PackageName
 PackageName:
   "identifier"   { $$ = driver.variables[$1]; }
-exp:
-  exp "+" exp   { $$ = $1 + $3; }
-| exp "-" exp   { $$ = $1 - $3; }
-| exp "*" exp   { $$ = $1 * $3; }
-| exp "/" exp   { $$ = $1 / $3; }
-| "(" exp ")"   { std::swap ($$, $2); }
-| "identifier"  { $$ = driver.variables[$1]; }
-| "number"      { std::swap ($$, $1); };
+
+ImportDeclS:
+  ImportDeclS ImportDecl | ImportDecl
+ImportDecl:
+  "import" "(" ImportSpecS ")"
+  | "import" ImportSpec
+ImportSpecS:
+  ImportSpecS ImportSpec ";" | ImportSpec ";"
+ImportSpec:
+  "." ImportPath
+  | PackageName ImportPath
+  | ImportPath
+ImportPath:
+  STRING { $$ = driver.variables[$1]; }
+/* exp: */
+/*   exp "+" exp   { $$ = $1 + $3; } */
+/* | exp "-" exp   { $$ = $1 - $3; } */
+/* | exp "*" exp   { $$ = $1 * $3; } */
+/* | exp "/" exp   { $$ = $1 / $3; } */
+/* | "(" exp ")"   { std::swap ($$, $2); } */
+/* | "identifier"  { $$ = driver.variables[$1]; } */
+/* | "number"      { std::swap ($$, $1); }; */
 %%
 
 void

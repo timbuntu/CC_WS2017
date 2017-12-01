@@ -36,7 +36,7 @@ int   [0-9]+
 blank [ \t]
 digit       [0-9]
 letter      [a-zA-Z]
-string_lit  ^[\"`][^\"']*[\"`]$
+string_lit  [\"`][^\"']*[\"`]
 
 %{
   // Code run each time a pattern is matched.
@@ -60,11 +60,12 @@ string_lit  ^[\"`][^\"']*[\"`]$
 ")"      return yy::calcxx_parser::make_RPAREN(loc);
 ":="     return yy::calcxx_parser::make_ASSIGN(loc);
 
-"!="         return yy::calcxx_parser::make_NEQUAL(loc); 
-"="      return yy::calcxx_parser::make_EQUAL(loc); 
-";"      return yy::calcxx_parser::make_SEMIC(loc); 
-"{"      return yy::calcxx_parser::make_LCURLY(loc); 
-"}"      return yy::calcxx_parser::make_RCURLY(loc); 
+"!="         return yy::calcxx_parser::make_NEQUAL(loc);
+"="      return yy::calcxx_parser::make_EQUAL(loc);
+";"      return yy::calcxx_parser::make_SEMIC(loc);
+"{"      return yy::calcxx_parser::make_LCURLY(loc);
+"}"      return yy::calcxx_parser::make_RCURLY(loc);
+"."      return yy::calcxx_parser::make_DOT(loc);
 "package"        return yy::calcxx_parser::make_PACKAGE(loc); 
 "import"         return yy::calcxx_parser::make_IMPORT(loc); 
 "func"           return yy::calcxx_parser::make_FUNC(loc); 

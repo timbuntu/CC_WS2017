@@ -295,6 +295,7 @@ namespace yy {
 
       // "identifier"
       // "string"
+      // ImportPath
       char dummy2[sizeof(std::string)];
 };
 
@@ -334,9 +335,10 @@ namespace yy {
         TOK_PACKAGE = 270,
         TOK_IMPORT = 271,
         TOK_FUNC = 272,
-        TOK_IDENTIFIER = 273,
-        TOK_STRING = 274,
-        TOK_NUMBER = 275
+        TOK_DOT = 273,
+        TOK_IDENTIFIER = 274,
+        TOK_STRING = 275,
+        TOK_NUMBER = 276
       };
     };
 
@@ -508,6 +510,10 @@ namespace yy {
     static inline
     symbol_type
     make_FUNC (const location_type& l);
+
+    static inline
+    symbol_type
+    make_DOT (const location_type& l);
 
     static inline
     symbol_type
@@ -726,12 +732,12 @@ namespace yy {
     enum
     {
       yyeof_ = 0,
-      yylast_ = 2,     ///< Last index in yytable_.
-      yynnts_ = 5,  ///< Number of nonterminal symbols.
+      yylast_ = 23,     ///< Last index in yytable_.
+      yynnts_ = 10,  ///< Number of nonterminal symbols.
       yyfinal_ = 7, ///< Termination state number.
       yyterror_ = 1,
       yyerrcode_ = 256,
-      yyntokens_ = 21  ///< Number of tokens.
+      yyntokens_ = 22  ///< Number of tokens.
     };
 
 
@@ -775,9 +781,9 @@ namespace yy {
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
        5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
-      15,    16,    17,    18,    19,    20
+      15,    16,    17,    18,    19,    20,    21
     };
-    const unsigned int user_token_number_max_ = 275;
+    const unsigned int user_token_number_max_ = 276;
     const token_number_type undef_token_ = 2;
 
     if (static_cast<int>(t) <= yyeof_)
@@ -810,13 +816,14 @@ namespace yy {
   {
       switch (other.type_get ())
     {
-      case 20: // "number"
-      case 25: // PackageName
+      case 21: // "number"
+      case 26: // PackageName
         value.copy< int > (other.value);
         break;
 
-      case 18: // "identifier"
-      case 19: // "string"
+      case 19: // "identifier"
+      case 20: // "string"
+      case 31: // ImportPath
         value.copy< std::string > (other.value);
         break;
 
@@ -837,13 +844,14 @@ namespace yy {
     (void) v;
       switch (this->type_get ())
     {
-      case 20: // "number"
-      case 25: // PackageName
+      case 21: // "number"
+      case 26: // PackageName
         value.copy< int > (v);
         break;
 
-      case 18: // "identifier"
-      case 19: // "string"
+      case 19: // "identifier"
+      case 20: // "string"
+      case 31: // ImportPath
         value.copy< std::string > (v);
         break;
 
@@ -902,13 +910,14 @@ namespace yy {
     // Type destructor.
     switch (yytype)
     {
-      case 20: // "number"
-      case 25: // PackageName
+      case 21: // "number"
+      case 26: // PackageName
         value.template destroy< int > ();
         break;
 
-      case 18: // "identifier"
-      case 19: // "string"
+      case 19: // "identifier"
+      case 20: // "string"
+      case 31: // ImportPath
         value.template destroy< std::string > ();
         break;
 
@@ -935,13 +944,14 @@ namespace yy {
     super_type::move(s);
       switch (this->type_get ())
     {
-      case 20: // "number"
-      case 25: // PackageName
+      case 21: // "number"
+      case 26: // PackageName
         value.move< int > (s.value);
         break;
 
-      case 18: // "identifier"
-      case 19: // "string"
+      case 19: // "identifier"
+      case 20: // "string"
+      case 31: // ImportPath
         value.move< std::string > (s.value);
         break;
 
@@ -1002,7 +1012,7 @@ namespace yy {
     {
        0,   256,   257,   258,   259,   260,   261,   262,   263,   264,
      265,   266,   267,   268,   269,   270,   271,   272,   273,   274,
-     275
+     275,   276
     };
     return static_cast<token_type> (yytoken_number_[type]);
   }
@@ -1104,6 +1114,12 @@ namespace yy {
   }
 
   calcxx_parser::symbol_type
+  calcxx_parser::make_DOT (const location_type& l)
+  {
+    return symbol_type (token::TOK_DOT, l);
+  }
+
+  calcxx_parser::symbol_type
   calcxx_parser::make_IDENTIFIER (const std::string& v, const location_type& l)
   {
     return symbol_type (token::TOK_IDENTIFIER, v, l);
@@ -1124,7 +1140,7 @@ namespace yy {
 
 
 } // yy
-#line 1128 "calc++-parser.hh" // lalr1.cc:377
+#line 1144 "calc++-parser.hh" // lalr1.cc:377
 
 
 

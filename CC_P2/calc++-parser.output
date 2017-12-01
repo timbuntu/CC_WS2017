@@ -10,28 +10,12 @@ Terminals unused in grammar
    "+"
    "*"
    "/"
-   "("
-   ")"
    "{"
    "}"
-   ";"
    "="
    "!="
-   "import"
    "func"
-   "string"
    "number"
-
-
-Rules useless in grammar
-
-    5 exp: exp "+" exp
-    6    | exp "-" exp
-    7    | exp "*" exp
-    8    | exp "/" exp
-    9    | "(" exp ")"
-   10    | "identifier"
-   11    | "number"
 
 
 Grammar
@@ -40,11 +24,27 @@ Grammar
 
     1 unit: SourceFile
 
-    2 SourceFile: PackageClause
+    2 SourceFile: PackageClause ImportDeclS
+    3           | PackageClause
 
-    3 PackageClause: "package" PackageName
+    4 PackageClause: "package" PackageName
 
-    4 PackageName: "identifier"
+    5 PackageName: "identifier"
+
+    6 ImportDeclS: ImportDeclS ImportDecl
+    7            | ImportDecl
+
+    8 ImportDecl: "import" "(" ImportSpecS ")"
+    9           | "import" ImportSpec
+
+   10 ImportSpecS: ImportSpecS ImportSpec ";"
+   11            | ImportSpec ";"
+
+   12 ImportSpec: "." ImportPath
+   13           | PackageName ImportPath
+   14           | ImportPath
+
+   15 ImportPath: "string"
 
 
 Terminals, with rules where they appear
@@ -56,33 +56,44 @@ error (256)
 "+" (260)
 "*" (261)
 "/" (262)
-"(" (263)
-")" (264)
+"(" (263) 8
+")" (264) 8
 "{" (265)
 "}" (266)
-";" (267)
+";" (267) 10 11
 "=" (268)
 "!=" (269)
-"package" (270) 3
-"import" (271)
+"package" (270) 4
+"import" (271) 8 9
 "func" (272)
-"identifier" (273) 4
-"string" (274)
-"number" (275)
+"." (273) 12
+"identifier" (274) 5
+"string" (275) 15
+"number" (276)
 
 
 Nonterminals, with rules where they appear
 
-$accept (21)
+$accept (22)
     on left: 0
-unit (22)
+unit (23)
     on left: 1, on right: 0
-SourceFile (23)
-    on left: 2, on right: 1
-PackageClause (24)
-    on left: 3, on right: 2
-PackageName (25)
-    on left: 4, on right: 3
+SourceFile (24)
+    on left: 2 3, on right: 1
+PackageClause (25)
+    on left: 4, on right: 2 3
+PackageName (26)
+    on left: 5, on right: 4 13
+ImportDeclS (27)
+    on left: 6 7, on right: 2 6
+ImportDecl (28)
+    on left: 8 9, on right: 6 7
+ImportSpecS (29)
+    on left: 10 11, on right: 8 10
+ImportSpec (30)
+    on left: 12 13 14, on right: 9 10 11
+ImportPath (31)
+    on left: 15, on right: 12 13 14
 
 
 State 0
@@ -98,7 +109,7 @@ State 0
 
 State 1
 
-    3 PackageClause: "package" . PackageName
+    4 PackageClause: "package" . PackageName
 
     "identifier"  shift, and go to state 5
 
@@ -121,23 +132,29 @@ State 3
 
 State 4
 
-    2 SourceFile: PackageClause .
+    2 SourceFile: PackageClause . ImportDeclS
+    3           | PackageClause .
 
-    $default  reduce using rule 2 (SourceFile)
+    "import"  shift, and go to state 8
+
+    $default  reduce using rule 3 (SourceFile)
+
+    ImportDeclS  go to state 9
+    ImportDecl   go to state 10
 
 
 State 5
 
-    4 PackageName: "identifier" .
+    5 PackageName: "identifier" .
 
-    $default  reduce using rule 4 (PackageName)
+    $default  reduce using rule 5 (PackageName)
 
 
 State 6
 
-    3 PackageClause: "package" PackageName .
+    4 PackageClause: "package" PackageName .
 
-    $default  reduce using rule 3 (PackageClause)
+    $default  reduce using rule 4 (PackageClause)
 
 
 State 7
@@ -145,3 +162,161 @@ State 7
     0 $accept: unit "end of file" .
 
     $default  accept
+
+
+State 8
+
+    8 ImportDecl: "import" . "(" ImportSpecS ")"
+    9           | "import" . ImportSpec
+
+    "("           shift, and go to state 11
+    "."           shift, and go to state 12
+    "identifier"  shift, and go to state 5
+    "string"      shift, and go to state 13
+
+    PackageName  go to state 14
+    ImportSpec   go to state 15
+    ImportPath   go to state 16
+
+
+State 9
+
+    2 SourceFile: PackageClause ImportDeclS .
+    6 ImportDeclS: ImportDeclS . ImportDecl
+
+    "import"  shift, and go to state 8
+
+    $default  reduce using rule 2 (SourceFile)
+
+    ImportDecl  go to state 17
+
+
+State 10
+
+    7 ImportDeclS: ImportDecl .
+
+    $default  reduce using rule 7 (ImportDeclS)
+
+
+State 11
+
+    8 ImportDecl: "import" "(" . ImportSpecS ")"
+
+    "."           shift, and go to state 12
+    "identifier"  shift, and go to state 5
+    "string"      shift, and go to state 13
+
+    PackageName  go to state 14
+    ImportSpecS  go to state 18
+    ImportSpec   go to state 19
+    ImportPath   go to state 16
+
+
+State 12
+
+   12 ImportSpec: "." . ImportPath
+
+    "string"  shift, and go to state 13
+
+    ImportPath  go to state 20
+
+
+State 13
+
+   15 ImportPath: "string" .
+
+    $default  reduce using rule 15 (ImportPath)
+
+
+State 14
+
+   13 ImportSpec: PackageName . ImportPath
+
+    "string"  shift, and go to state 13
+
+    ImportPath  go to state 21
+
+
+State 15
+
+    9 ImportDecl: "import" ImportSpec .
+
+    $default  reduce using rule 9 (ImportDecl)
+
+
+State 16
+
+   14 ImportSpec: ImportPath .
+
+    $default  reduce using rule 14 (ImportSpec)
+
+
+State 17
+
+    6 ImportDeclS: ImportDeclS ImportDecl .
+
+    $default  reduce using rule 6 (ImportDeclS)
+
+
+State 18
+
+    8 ImportDecl: "import" "(" ImportSpecS . ")"
+   10 ImportSpecS: ImportSpecS . ImportSpec ";"
+
+    ")"           shift, and go to state 22
+    "."           shift, and go to state 12
+    "identifier"  shift, and go to state 5
+    "string"      shift, and go to state 13
+
+    PackageName  go to state 14
+    ImportSpec   go to state 23
+    ImportPath   go to state 16
+
+
+State 19
+
+   11 ImportSpecS: ImportSpec . ";"
+
+    ";"  shift, and go to state 24
+
+
+State 20
+
+   12 ImportSpec: "." ImportPath .
+
+    $default  reduce using rule 12 (ImportSpec)
+
+
+State 21
+
+   13 ImportSpec: PackageName ImportPath .
+
+    $default  reduce using rule 13 (ImportSpec)
+
+
+State 22
+
+    8 ImportDecl: "import" "(" ImportSpecS ")" .
+
+    $default  reduce using rule 8 (ImportDecl)
+
+
+State 23
+
+   10 ImportSpecS: ImportSpecS ImportSpec . ";"
+
+    ";"  shift, and go to state 25
+
+
+State 24
+
+   11 ImportSpecS: ImportSpec ";" .
+
+    $default  reduce using rule 11 (ImportSpecS)
+
+
+State 25
+
+   10 ImportSpecS: ImportSpecS ImportSpec ";" .
+
+    $default  reduce using rule 10 (ImportSpecS)
