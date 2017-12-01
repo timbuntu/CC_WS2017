@@ -69,22 +69,30 @@ class calcxx_driver;
 %token <std::string> STRING "string"
 %token <int> NUMBER "number"
 %type  <int> exp
+%type  <int> PackageName
 
 %printer { yyoutput << $$; } <*>;
 
 %%
 %start unit;
-unit: assignments exp  { driver.result = $2; };
+/* unit: SourceFile  { driver.result = $2; }; */
+unit: SourceFile;
 
-assignments:
-  %empty                 {}
-| assignments assignment {};
+/* assignments: */
+/*   %empty                 {} */
+/* | assignments assignment {}; */
 
-assignment:
-  "identifier" ":=" exp { driver.variables[$1] = $3; };
+/* assignment: */
+/*   "identifier" ":=" exp { driver.variables[$1] = $3; }; */
 
 %left "+" "-";
 %left "*" "/";
+SourceFile:
+  PackageClause
+PackageClause:
+  "package" PackageName
+PackageName:
+  "identifier"   { $$ = driver.variables[$1]; }
 exp:
   exp "+" exp   { $$ = $1 + $3; }
 | exp "-" exp   { $$ = $1 - $3; }

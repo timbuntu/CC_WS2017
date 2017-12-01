@@ -290,7 +290,7 @@ namespace yy {
     union union_type
     {
       // "number"
-      // exp
+      // PackageName
       char dummy1[sizeof(int)];
 
       // "identifier"
@@ -726,9 +726,9 @@ namespace yy {
     enum
     {
       yyeof_ = 0,
-      yylast_ = 24,     ///< Last index in yytable_.
+      yylast_ = 2,     ///< Last index in yytable_.
       yynnts_ = 5,  ///< Number of nonterminal symbols.
-      yyfinal_ = 3, ///< Termination state number.
+      yyfinal_ = 7, ///< Termination state number.
       yyterror_ = 1,
       yyerrcode_ = 256,
       yyntokens_ = 21  ///< Number of tokens.
@@ -811,7 +811,7 @@ namespace yy {
       switch (other.type_get ())
     {
       case 20: // "number"
-      case 25: // exp
+      case 25: // PackageName
         value.copy< int > (other.value);
         break;
 
@@ -838,7 +838,7 @@ namespace yy {
       switch (this->type_get ())
     {
       case 20: // "number"
-      case 25: // exp
+      case 25: // PackageName
         value.copy< int > (v);
         break;
 
@@ -903,7 +903,7 @@ namespace yy {
     switch (yytype)
     {
       case 20: // "number"
-      case 25: // exp
+      case 25: // PackageName
         value.template destroy< int > ();
         break;
 
@@ -936,7 +936,7 @@ namespace yy {
       switch (this->type_get ())
     {
       case 20: // "number"
-      case 25: // exp
+      case 25: // PackageName
         value.move< int > (s.value);
         break;
 
