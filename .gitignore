@@ -1,4 +1,5 @@
 #foo#
+calc++-parser.output
  *.o  calc++  calc++-scanner.cc calc++-parser.cc  calc++-scanner.hh calc++-parser.hh calc++-parser.output location.hh stack.hh position.hh
 
 /CC_P1/nbproject/private/
