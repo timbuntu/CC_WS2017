@@ -87,7 +87,7 @@ class calcxx_driver;
 %type  <Node*> ImportPath
 
 
-%printer { yyoutput << $$; } <*>;
+/* %printer { yyoutput << $$; } <*>; */
 
 %%
 %start unit;
@@ -102,34 +102,31 @@ unit: SourceFile;
 /* assignment: */
 /*   "identifier" ":=" exp { driver.variables[$1] = $3; }; */
 
-%left "+" "-";
-%left "*" "/";
+/* %left "+" "-"; */
+/* %left "*" "/"; */
 SourceFile:
-  /* PackageClause { driver.rootNode->addNode(*$1);} */ 
-  PackageClause { driver.rootNode.addNode(Node("DummyPackageClause"));} 
-  /* ImportDeclS { driver.rootNode->addNode(*$1);} */ 
-  ImportDeclS { driver.rootNode.addNode(Node("DummyPackageClause"));} 
-  /* | PackageClause { driver.rootNode->addNode(*$1);} */ 
-  | PackageClause { driver.rootNode.addNode(Node("DummyPackageClause"));} 
+  PackageClause { driver.rootNode.addNode(*$1);} 
+  ImportDeclS { driver.rootNode.addNode(*$3);} 
+  | PackageClause { driver.rootNode.addNode(*$1);} 
 
 PackageClause:
-  "package" PackageName { $$ = new Node("PackageName") ;}
+  "package" PackageName { Node* ret = new Node("PackageName"); ret->addNode(*$2); $$ = ret;}
 PackageName:
   "identifier"   { $$ = new Node("Identifier");}
 
 ImportDeclS:
-  ImportDeclS ImportDecl { $$ = new Node("ImportDeclS") ;}
-  | ImportDecl { $$ = new Node("ImportDeclS") ;}
+  ImportDeclS ImportDecl {Node* ret = new Node("ImportDeclS"); ret->addNode(*$1); ret->addNode(*$2); $$ = ret;}
+  | ImportDecl {Node* ret = new Node("ImportDeclS"); ret->addNode(*$1); $$ = ret;}
 ImportDecl:
-  "import" "(" ImportSpecS ")" { $$ = new Node("ImportDecl") ;}
-  | "import" ImportSpec  { $$ = new Node("ImportDecl") ;}
+  "import" "(" ImportSpecS ")" {Node* ret = new Node("ImportDecl"); ret->addNode(*$3); $$ = ret;}
+  | "import" ImportSpec  {Node* ret = new Node("ImportDecl"); ret->addNode(*$2); $$ = ret;}
 ImportSpecS:
-  ImportSpecS ImportSpec ";"  { $$ = new Node("ImportSpecS") ;}
-  | ImportSpec ";"  { $$ = new Node("ImportSpecS") ;}
+  ImportSpecS ImportSpec ";"  {Node* ret = new Node("ImportSpecS"); ret->addNode(*$1); ret->addNode(*$2); $$ = ret;}
+  | ImportSpec ";"  {Node* ret = new Node("ImportSpecS"); ret->addNode(*$1); $$ = ret;}
 ImportSpec:
-  "." ImportPath { $$ = new Node("ImportSpec") ;}
-  | PackageName ImportPath { $$ = new Node("ImportSpec") ;}
-  | ImportPath { $$ = new Node("ImportSpec") ;}
+  "." ImportPath {Node* ret = new Node("ImportSpec"); ret->addNode(*$2); $$ = ret;}
+  | PackageName ImportPath {Node* ret = new Node("ImportSpec"); ret->addNode(*$1); ret->addNode(*$2); $$ = ret;}
+  | ImportPath {Node* ret = new Node("ImportSpec"); ret->addNode(*$1); $$ = ret;}
 ImportPath:
   STRING { $$ = new Node("ImportPath") ;}
 /* exp: */

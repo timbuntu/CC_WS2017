@@ -1,38 +1,43 @@
 
 #include "Node.h"
 
-Node::Node() { }
+Node::Node() { 
+    m_name = "uninitialized";
+}
 
 Node::Node(std::string name) {
-	this->name = name;
+	m_name = name;
 }
 
 void Node::addNode(Node node) {
 	nodes.push_back(node);
 }
 
-std::list<Node> Node::getNodes() const {
+std::vector<Node> Node::getNodes() const {
 	return nodes;
 }
 
 
 std::string Node::getName() const {
-	return name;
+	return m_name;
 }
 
 void Node::setName(std::string name) {
-	this->name = name;
+	m_name = name;
 }
 
 void Node::print(int level) const {
     for(int i = 0; i < level; i++)
             std::cout << '\t';
 
-    std::cout << this->name << "-->" << std::endl;
-    std::cout << "Count of Nodes in this node: " << this->getNodes().size() <<std::endl;
+    std::cout << getName() << "-->" << std::endl;
 
-    for(Node node : nodes){
+    /* for(Node node : getNodes()){ */
+    for (int i = 0; i < (int) getNodes().size(); i++){
+        Node node = getNodes()[i];
+        /* std::cout << node.getName(); */
         node.print(level+1);
+        /* node.print(level+1); */
     }
     
 }

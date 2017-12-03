@@ -344,89 +344,7 @@ namespace yy {
     yyo << (yytype < yyntokens_ ? "token" : "nterm")
         << ' ' << yytname_[yytype] << " ("
         << yysym.location << ": ";
-    switch (yytype)
-    {
-            case 19: // "identifier"
-
-#line 90 "calc++-parser.yy" // lalr1.cc:636
-        { yyoutput << yysym.value.template as< std::string > (); }
-#line 354 "calc++-parser.cc" // lalr1.cc:636
-        break;
-
-      case 20: // "string"
-
-#line 90 "calc++-parser.yy" // lalr1.cc:636
-        { yyoutput << yysym.value.template as< std::string > (); }
-#line 361 "calc++-parser.cc" // lalr1.cc:636
-        break;
-
-      case 21: // "number"
-
-#line 90 "calc++-parser.yy" // lalr1.cc:636
-        { yyoutput << yysym.value.template as< int > (); }
-#line 368 "calc++-parser.cc" // lalr1.cc:636
-        break;
-
-      case 24: // SourceFile
-
-#line 90 "calc++-parser.yy" // lalr1.cc:636
-        { yyoutput << yysym.value.template as< Node* > (); }
-#line 375 "calc++-parser.cc" // lalr1.cc:636
-        break;
-
-      case 26: // PackageClause
-
-#line 90 "calc++-parser.yy" // lalr1.cc:636
-        { yyoutput << yysym.value.template as< Node* > (); }
-#line 382 "calc++-parser.cc" // lalr1.cc:636
-        break;
-
-      case 27: // PackageName
-
-#line 90 "calc++-parser.yy" // lalr1.cc:636
-        { yyoutput << yysym.value.template as< Node* > (); }
-#line 389 "calc++-parser.cc" // lalr1.cc:636
-        break;
-
-      case 28: // ImportDeclS
-
-#line 90 "calc++-parser.yy" // lalr1.cc:636
-        { yyoutput << yysym.value.template as< Node* > (); }
-#line 396 "calc++-parser.cc" // lalr1.cc:636
-        break;
-
-      case 29: // ImportDecl
-
-#line 90 "calc++-parser.yy" // lalr1.cc:636
-        { yyoutput << yysym.value.template as< Node* > (); }
-#line 403 "calc++-parser.cc" // lalr1.cc:636
-        break;
-
-      case 30: // ImportSpecS
-
-#line 90 "calc++-parser.yy" // lalr1.cc:636
-        { yyoutput << yysym.value.template as< Node* > (); }
-#line 410 "calc++-parser.cc" // lalr1.cc:636
-        break;
-
-      case 31: // ImportSpec
-
-#line 90 "calc++-parser.yy" // lalr1.cc:636
-        { yyoutput << yysym.value.template as< Node* > (); }
-#line 417 "calc++-parser.cc" // lalr1.cc:636
-        break;
-
-      case 32: // ImportPath
-
-#line 90 "calc++-parser.yy" // lalr1.cc:636
-        { yyoutput << yysym.value.template as< Node* > (); }
-#line 424 "calc++-parser.cc" // lalr1.cc:636
-        break;
-
-
-      default:
-        break;
-    }
+    YYUSE (yytype);
     yyo << ')';
   }
 #endif
@@ -539,7 +457,7 @@ namespace yy {
   yyla.location.begin.filename = yyla.location.end.filename = &driver.file;
 }
 
-#line 543 "calc++-parser.cc" // lalr1.cc:741
+#line 461 "calc++-parser.cc" // lalr1.cc:741
 
     /* Initialize the stack.  The initial state will be set in
        yynewstate, since the latter expects the semantical and the
@@ -667,97 +585,97 @@ namespace yy {
           switch (yyn)
             {
   case 3:
-#line 109 "calc++-parser.yy" // lalr1.cc:859
-    { driver.rootNode.addNode(Node("DummyPackageClause"));}
-#line 673 "calc++-parser.cc" // lalr1.cc:859
+#line 108 "calc++-parser.yy" // lalr1.cc:859
+    { driver.rootNode.addNode(*yystack_[0].value.as< Node* > ());}
+#line 591 "calc++-parser.cc" // lalr1.cc:859
     break;
 
   case 4:
-#line 111 "calc++-parser.yy" // lalr1.cc:859
-    { driver.rootNode.addNode(Node("DummyPackageClause"));}
-#line 679 "calc++-parser.cc" // lalr1.cc:859
+#line 109 "calc++-parser.yy" // lalr1.cc:859
+    { driver.rootNode.addNode(*yystack_[0].value.as< Node* > ());}
+#line 597 "calc++-parser.cc" // lalr1.cc:859
     break;
 
   case 5:
-#line 113 "calc++-parser.yy" // lalr1.cc:859
-    { driver.rootNode.addNode(Node("DummyPackageClause"));}
-#line 685 "calc++-parser.cc" // lalr1.cc:859
+#line 110 "calc++-parser.yy" // lalr1.cc:859
+    { driver.rootNode.addNode(*yystack_[0].value.as< Node* > ());}
+#line 603 "calc++-parser.cc" // lalr1.cc:859
     break;
 
   case 6:
-#line 116 "calc++-parser.yy" // lalr1.cc:859
-    { yylhs.value.as< Node* > () = new Node("PackageName") ;}
-#line 691 "calc++-parser.cc" // lalr1.cc:859
+#line 113 "calc++-parser.yy" // lalr1.cc:859
+    { Node* ret = new Node("PackageName"); ret->addNode(*yystack_[0].value.as< Node* > ()); yylhs.value.as< Node* > () = ret;}
+#line 609 "calc++-parser.cc" // lalr1.cc:859
     break;
 
   case 7:
-#line 118 "calc++-parser.yy" // lalr1.cc:859
+#line 115 "calc++-parser.yy" // lalr1.cc:859
     { yylhs.value.as< Node* > () = new Node("Identifier");}
-#line 697 "calc++-parser.cc" // lalr1.cc:859
+#line 615 "calc++-parser.cc" // lalr1.cc:859
     break;
 
   case 8:
-#line 121 "calc++-parser.yy" // lalr1.cc:859
-    { yylhs.value.as< Node* > () = new Node("ImportDeclS") ;}
-#line 703 "calc++-parser.cc" // lalr1.cc:859
+#line 118 "calc++-parser.yy" // lalr1.cc:859
+    {Node* ret = new Node("ImportDeclS"); ret->addNode(*yystack_[1].value.as< Node* > ()); ret->addNode(*yystack_[0].value.as< Node* > ()); yylhs.value.as< Node* > () = ret;}
+#line 621 "calc++-parser.cc" // lalr1.cc:859
     break;
 
   case 9:
-#line 122 "calc++-parser.yy" // lalr1.cc:859
-    { yylhs.value.as< Node* > () = new Node("ImportDeclS") ;}
-#line 709 "calc++-parser.cc" // lalr1.cc:859
+#line 119 "calc++-parser.yy" // lalr1.cc:859
+    {Node* ret = new Node("ImportDeclS"); ret->addNode(*yystack_[0].value.as< Node* > ()); yylhs.value.as< Node* > () = ret;}
+#line 627 "calc++-parser.cc" // lalr1.cc:859
     break;
 
   case 10:
-#line 124 "calc++-parser.yy" // lalr1.cc:859
-    { yylhs.value.as< Node* > () = new Node("ImportDecl") ;}
-#line 715 "calc++-parser.cc" // lalr1.cc:859
+#line 121 "calc++-parser.yy" // lalr1.cc:859
+    {Node* ret = new Node("ImportDecl"); ret->addNode(*yystack_[1].value.as< Node* > ()); yylhs.value.as< Node* > () = ret;}
+#line 633 "calc++-parser.cc" // lalr1.cc:859
     break;
 
   case 11:
-#line 125 "calc++-parser.yy" // lalr1.cc:859
-    { yylhs.value.as< Node* > () = new Node("ImportDecl") ;}
-#line 721 "calc++-parser.cc" // lalr1.cc:859
+#line 122 "calc++-parser.yy" // lalr1.cc:859
+    {Node* ret = new Node("ImportDecl"); ret->addNode(*yystack_[0].value.as< Node* > ()); yylhs.value.as< Node* > () = ret;}
+#line 639 "calc++-parser.cc" // lalr1.cc:859
     break;
 
   case 12:
-#line 127 "calc++-parser.yy" // lalr1.cc:859
-    { yylhs.value.as< Node* > () = new Node("ImportSpecS") ;}
-#line 727 "calc++-parser.cc" // lalr1.cc:859
+#line 124 "calc++-parser.yy" // lalr1.cc:859
+    {Node* ret = new Node("ImportSpecS"); ret->addNode(*yystack_[2].value.as< Node* > ()); ret->addNode(*yystack_[1].value.as< Node* > ()); yylhs.value.as< Node* > () = ret;}
+#line 645 "calc++-parser.cc" // lalr1.cc:859
     break;
 
   case 13:
-#line 128 "calc++-parser.yy" // lalr1.cc:859
-    { yylhs.value.as< Node* > () = new Node("ImportSpecS") ;}
-#line 733 "calc++-parser.cc" // lalr1.cc:859
+#line 125 "calc++-parser.yy" // lalr1.cc:859
+    {Node* ret = new Node("ImportSpecS"); ret->addNode(*yystack_[1].value.as< Node* > ()); yylhs.value.as< Node* > () = ret;}
+#line 651 "calc++-parser.cc" // lalr1.cc:859
     break;
 
   case 14:
-#line 130 "calc++-parser.yy" // lalr1.cc:859
-    { yylhs.value.as< Node* > () = new Node("ImportSpec") ;}
-#line 739 "calc++-parser.cc" // lalr1.cc:859
+#line 127 "calc++-parser.yy" // lalr1.cc:859
+    {Node* ret = new Node("ImportSpec"); ret->addNode(*yystack_[0].value.as< Node* > ()); yylhs.value.as< Node* > () = ret;}
+#line 657 "calc++-parser.cc" // lalr1.cc:859
     break;
 
   case 15:
-#line 131 "calc++-parser.yy" // lalr1.cc:859
-    { yylhs.value.as< Node* > () = new Node("ImportSpec") ;}
-#line 745 "calc++-parser.cc" // lalr1.cc:859
+#line 128 "calc++-parser.yy" // lalr1.cc:859
+    {Node* ret = new Node("ImportSpec"); ret->addNode(*yystack_[1].value.as< Node* > ()); ret->addNode(*yystack_[0].value.as< Node* > ()); yylhs.value.as< Node* > () = ret;}
+#line 663 "calc++-parser.cc" // lalr1.cc:859
     break;
 
   case 16:
-#line 132 "calc++-parser.yy" // lalr1.cc:859
-    { yylhs.value.as< Node* > () = new Node("ImportSpec") ;}
-#line 751 "calc++-parser.cc" // lalr1.cc:859
+#line 129 "calc++-parser.yy" // lalr1.cc:859
+    {Node* ret = new Node("ImportSpec"); ret->addNode(*yystack_[0].value.as< Node* > ()); yylhs.value.as< Node* > () = ret;}
+#line 669 "calc++-parser.cc" // lalr1.cc:859
     break;
 
   case 17:
-#line 134 "calc++-parser.yy" // lalr1.cc:859
+#line 131 "calc++-parser.yy" // lalr1.cc:859
     { yylhs.value.as< Node* > () = new Node("ImportPath") ;}
-#line 757 "calc++-parser.cc" // lalr1.cc:859
+#line 675 "calc++-parser.cc" // lalr1.cc:859
     break;
 
 
-#line 761 "calc++-parser.cc" // lalr1.cc:859
+#line 679 "calc++-parser.cc" // lalr1.cc:859
             default:
               break;
             }
@@ -1103,8 +1021,8 @@ namespace yy {
   const unsigned char
   calcxx_parser::yyrline_[] =
   {
-       0,    96,    96,   109,   109,   113,   116,   118,   121,   122,
-     124,   125,   127,   128,   130,   131,   132,   134
+       0,    96,    96,   108,   108,   110,   113,   115,   118,   119,
+     121,   122,   124,   125,   127,   128,   129,   131
   };
 
   // Print the state stack on the debug stream.
@@ -1139,8 +1057,8 @@ namespace yy {
 
 
 } // yy
-#line 1143 "calc++-parser.cc" // lalr1.cc:1167
-#line 143 "calc++-parser.yy" // lalr1.cc:1168
+#line 1061 "calc++-parser.cc" // lalr1.cc:1167
+#line 140 "calc++-parser.yy" // lalr1.cc:1168
 
 
 void yy::calcxx_parser::error (const location_type& l, const std::string& m) {

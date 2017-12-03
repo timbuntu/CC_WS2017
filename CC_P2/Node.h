@@ -3,20 +3,20 @@
 #define NODE
 
 #include <string>
-#include <list>
+#include <vector>
 #include <iostream>
 
 class Node {
 	
-	std::string name;
-	std::list<Node> nodes;
+	std::string m_name;
+	std::vector<Node> nodes;
 
 public:
 	Node();
 	Node(std::string name);
 
 	void addNode(Node node);
-	std::list<Node> getNodes() const;
+	std::vector<Node> getNodes() const;
 
 	std::string getName() const;
 	void setName(std::string name);
