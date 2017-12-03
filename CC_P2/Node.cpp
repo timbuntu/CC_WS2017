@@ -29,7 +29,10 @@ void Node::print(int level) const {
             std::cout << '\t';
 
     std::cout << this->name << "-->" << std::endl;
-    for(Node node : nodes)
-            node.print(level+1);
+    std::cout << "Count of Nodes in this node: " << this->getNodes().size() <<std::endl;
+
+    for(Node node : nodes){
+        node.print(level+1);
+    }
     
 }

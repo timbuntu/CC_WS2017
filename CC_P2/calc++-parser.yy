@@ -73,9 +73,9 @@ class calcxx_driver;
   DOT     "."
 ;
 
-%token <Node*> IDENTIFIER "identifier"
-%token <Node*> STRING "string"
-%token <Node*> NUMBER "number"
+%token <std::string> IDENTIFIER "identifier"
+%token <std::string> STRING "string"
+%token <int> NUMBER "number"
 %type  <Node*> exp
 %type  <Node*> SourceFile
 %type  <Node*> PackageClause

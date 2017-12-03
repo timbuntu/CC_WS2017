@@ -292,9 +292,6 @@ namespace yy {
     /// An auxiliary type to compute the largest semantic type.
     union union_type
     {
-      // "identifier"
-      // "string"
-      // "number"
       // SourceFile
       // PackageClause
       // PackageName
@@ -304,6 +301,13 @@ namespace yy {
       // ImportSpec
       // ImportPath
       char dummy1[sizeof(Node*)];
+
+      // "number"
+      char dummy2[sizeof(int)];
+
+      // "identifier"
+      // "string"
+      char dummy3[sizeof(std::string)];
 };
 
     /// Symbol semantic values.
@@ -384,6 +388,10 @@ namespace yy {
   basic_symbol (typename Base::kind_type t, const location_type& l);
 
   basic_symbol (typename Base::kind_type t, const Node* v, const location_type& l);
+
+  basic_symbol (typename Base::kind_type t, const int v, const location_type& l);
+
+  basic_symbol (typename Base::kind_type t, const std::string v, const location_type& l);
 
 
       /// Constructor for symbols with semantic value.
@@ -522,15 +530,15 @@ namespace yy {
 
     static inline
     symbol_type
-    make_IDENTIFIER (const Node*& v, const location_type& l);
+    make_IDENTIFIER (const std::string& v, const location_type& l);
 
     static inline
     symbol_type
-    make_STRING (const Node*& v, const location_type& l);
+    make_STRING (const std::string& v, const location_type& l);
 
     static inline
     symbol_type
-    make_NUMBER (const Node*& v, const location_type& l);
+    make_NUMBER (const int& v, const location_type& l);
 
 
     /// Build a parser object.
@@ -821,9 +829,6 @@ namespace yy {
   {
       switch (other.type_get ())
     {
-      case 19: // "identifier"
-      case 20: // "string"
-      case 21: // "number"
       case 24: // SourceFile
       case 26: // PackageClause
       case 27: // PackageName
@@ -833,6 +838,15 @@ namespace yy {
       case 31: // ImportSpec
       case 32: // ImportPath
         value.copy< Node* > (other.value);
+        break;
+
+      case 21: // "number"
+        value.copy< int > (other.value);
+        break;
+
+      case 19: // "identifier"
+      case 20: // "string"
+        value.copy< std::string > (other.value);
         break;
 
       default:
@@ -852,9 +866,6 @@ namespace yy {
     (void) v;
       switch (this->type_get ())
     {
-      case 19: // "identifier"
-      case 20: // "string"
-      case 21: // "number"
       case 24: // SourceFile
       case 26: // PackageClause
       case 27: // PackageName
@@ -864,6 +875,15 @@ namespace yy {
       case 31: // ImportSpec
       case 32: // ImportPath
         value.copy< Node* > (v);
+        break;
+
+      case 21: // "number"
+        value.copy< int > (v);
+        break;
+
+      case 19: // "identifier"
+      case 20: // "string"
+        value.copy< std::string > (v);
         break;
 
       default:
@@ -883,6 +903,20 @@ namespace yy {
 
   template <typename Base>
   calcxx_parser::basic_symbol<Base>::basic_symbol (typename Base::kind_type t, const Node* v, const location_type& l)
+    : Base (t)
+    , value (v)
+    , location (l)
+  {}
+
+  template <typename Base>
+  calcxx_parser::basic_symbol<Base>::basic_symbol (typename Base::kind_type t, const int v, const location_type& l)
+    : Base (t)
+    , value (v)
+    , location (l)
+  {}
+
+  template <typename Base>
+  calcxx_parser::basic_symbol<Base>::basic_symbol (typename Base::kind_type t, const std::string v, const location_type& l)
     : Base (t)
     , value (v)
     , location (l)
@@ -914,9 +948,6 @@ namespace yy {
     // Type destructor.
     switch (yytype)
     {
-      case 19: // "identifier"
-      case 20: // "string"
-      case 21: // "number"
       case 24: // SourceFile
       case 26: // PackageClause
       case 27: // PackageName
@@ -926,6 +957,15 @@ namespace yy {
       case 31: // ImportSpec
       case 32: // ImportPath
         value.template destroy< Node* > ();
+        break;
+
+      case 21: // "number"
+        value.template destroy< int > ();
+        break;
+
+      case 19: // "identifier"
+      case 20: // "string"
+        value.template destroy< std::string > ();
         break;
 
       default:
@@ -951,9 +991,6 @@ namespace yy {
     super_type::move(s);
       switch (this->type_get ())
     {
-      case 19: // "identifier"
-      case 20: // "string"
-      case 21: // "number"
       case 24: // SourceFile
       case 26: // PackageClause
       case 27: // PackageName
@@ -963,6 +1000,15 @@ namespace yy {
       case 31: // ImportSpec
       case 32: // ImportPath
         value.move< Node* > (s.value);
+        break;
+
+      case 21: // "number"
+        value.move< int > (s.value);
+        break;
+
+      case 19: // "identifier"
+      case 20: // "string"
+        value.move< std::string > (s.value);
         break;
 
       default:
@@ -1130,19 +1176,19 @@ namespace yy {
   }
 
   calcxx_parser::symbol_type
-  calcxx_parser::make_IDENTIFIER (const Node*& v, const location_type& l)
+  calcxx_parser::make_IDENTIFIER (const std::string& v, const location_type& l)
   {
     return symbol_type (token::TOK_IDENTIFIER, v, l);
   }
 
   calcxx_parser::symbol_type
-  calcxx_parser::make_STRING (const Node*& v, const location_type& l)
+  calcxx_parser::make_STRING (const std::string& v, const location_type& l)
   {
     return symbol_type (token::TOK_STRING, v, l);
   }
 
   calcxx_parser::symbol_type
-  calcxx_parser::make_NUMBER (const Node*& v, const location_type& l)
+  calcxx_parser::make_NUMBER (const int& v, const location_type& l)
   {
     return symbol_type (token::TOK_NUMBER, v, l);
   }
@@ -1150,7 +1196,7 @@ namespace yy {
 
 
 } // yy
-#line 1154 "calc++-parser.hh" // lalr1.cc:377
+#line 1200 "calc++-parser.hh" // lalr1.cc:377
 
 
 

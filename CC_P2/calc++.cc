@@ -11,7 +11,7 @@ int main (int argc, char *argv[]) {
                         driver.trace_scanning = true;
                 } else if (!driver.parse (argv[i])) {
                         std::cout << driver.result << std::endl;
-                        /* driver.rootNode->print(0); */
+                        driver.rootNode.print(0);
                 } else {
                         res = 1;
                 }
