@@ -1,8 +1,10 @@
 
 #include "Node.h"
 
+Node::Node() { }
+
 Node::Node(std::string name) {
-	this.name = name;
+	this->name = name;
 }
 
 void Node::addNode(Node node) {
@@ -15,18 +17,18 @@ std::list<Node> Node::getNodes() const {
 
 
 std::string Node::getName() const {
-	return node;
+	return name;
 }
 
 void Node::setName(std::string name) {
-	this.name = name;
+	this->name = name;
 }
 
 void Node::print(int level) const {
     for(int i = 0; i < level; i++)
             std::cout << '\t';
 
-    std::cout << this.name << "-->" << std::endl;
+    std::cout << this->name << "-->" << std::endl;
     for(Node node : nodes)
             node.print(level+1);
     

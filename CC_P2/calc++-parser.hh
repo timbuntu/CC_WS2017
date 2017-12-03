@@ -42,10 +42,13 @@
 // //                    "%code requires" blocks.
 #line 25 "calc++-parser.yy" // lalr1.cc:377
 
-# include <string>
 class calcxx_driver;
+# include <string>
+# include "Node.h"
+# include "Leaf.h"
+# include "Token.h"
 
-#line 49 "calc++-parser.hh" // lalr1.cc:377
+#line 52 "calc++-parser.hh" // lalr1.cc:377
 
 # include <cassert>
 # include <cstdlib> // std::abort
@@ -122,7 +125,7 @@ class calcxx_driver;
 
 
 namespace yy {
-#line 126 "calc++-parser.hh" // lalr1.cc:377
+#line 129 "calc++-parser.hh" // lalr1.cc:377
 
 
 
@@ -289,14 +292,18 @@ namespace yy {
     /// An auxiliary type to compute the largest semantic type.
     union union_type
     {
-      // "number"
-      // PackageName
-      char dummy1[sizeof(int)];
-
       // "identifier"
       // "string"
+      // "number"
+      // SourceFile
+      // PackageClause
+      // PackageName
+      // ImportDeclS
+      // ImportDecl
+      // ImportSpecS
+      // ImportSpec
       // ImportPath
-      char dummy2[sizeof(std::string)];
+      char dummy1[sizeof(Node*)];
 };
 
     /// Symbol semantic values.
@@ -376,9 +383,7 @@ namespace yy {
 
   basic_symbol (typename Base::kind_type t, const location_type& l);
 
-  basic_symbol (typename Base::kind_type t, const int v, const location_type& l);
-
-  basic_symbol (typename Base::kind_type t, const std::string v, const location_type& l);
+  basic_symbol (typename Base::kind_type t, const Node* v, const location_type& l);
 
 
       /// Constructor for symbols with semantic value.
@@ -517,15 +522,15 @@ namespace yy {
 
     static inline
     symbol_type
-    make_IDENTIFIER (const std::string& v, const location_type& l);
+    make_IDENTIFIER (const Node*& v, const location_type& l);
 
     static inline
     symbol_type
-    make_STRING (const std::string& v, const location_type& l);
+    make_STRING (const Node*& v, const location_type& l);
 
     static inline
     symbol_type
-    make_NUMBER (const int& v, const location_type& l);
+    make_NUMBER (const Node*& v, const location_type& l);
 
 
     /// Build a parser object.
@@ -610,7 +615,7 @@ namespace yy {
   // YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
   // positive, shift that token.  If negative, reduce the rule whose
   // number is the opposite.  If YYTABLE_NINF, syntax error.
-  static const unsigned char yytable_[];
+  static const signed char yytable_[];
 
   static const unsigned char yycheck_[];
 
@@ -732,8 +737,8 @@ namespace yy {
     enum
     {
       yyeof_ = 0,
-      yylast_ = 23,     ///< Last index in yytable_.
-      yynnts_ = 10,  ///< Number of nonterminal symbols.
+      yylast_ = 24,     ///< Last index in yytable_.
+      yynnts_ = 11,  ///< Number of nonterminal symbols.
       yyfinal_ = 7, ///< Termination state number.
       yyterror_ = 1,
       yyerrcode_ = 256,
@@ -816,15 +821,18 @@ namespace yy {
   {
       switch (other.type_get ())
     {
-      case 21: // "number"
-      case 26: // PackageName
-        value.copy< int > (other.value);
-        break;
-
       case 19: // "identifier"
       case 20: // "string"
-      case 31: // ImportPath
-        value.copy< std::string > (other.value);
+      case 21: // "number"
+      case 24: // SourceFile
+      case 26: // PackageClause
+      case 27: // PackageName
+      case 28: // ImportDeclS
+      case 29: // ImportDecl
+      case 30: // ImportSpecS
+      case 31: // ImportSpec
+      case 32: // ImportPath
+        value.copy< Node* > (other.value);
         break;
 
       default:
@@ -844,15 +852,18 @@ namespace yy {
     (void) v;
       switch (this->type_get ())
     {
-      case 21: // "number"
-      case 26: // PackageName
-        value.copy< int > (v);
-        break;
-
       case 19: // "identifier"
       case 20: // "string"
-      case 31: // ImportPath
-        value.copy< std::string > (v);
+      case 21: // "number"
+      case 24: // SourceFile
+      case 26: // PackageClause
+      case 27: // PackageName
+      case 28: // ImportDeclS
+      case 29: // ImportDecl
+      case 30: // ImportSpecS
+      case 31: // ImportSpec
+      case 32: // ImportPath
+        value.copy< Node* > (v);
         break;
 
       default:
@@ -871,14 +882,7 @@ namespace yy {
   {}
 
   template <typename Base>
-  calcxx_parser::basic_symbol<Base>::basic_symbol (typename Base::kind_type t, const int v, const location_type& l)
-    : Base (t)
-    , value (v)
-    , location (l)
-  {}
-
-  template <typename Base>
-  calcxx_parser::basic_symbol<Base>::basic_symbol (typename Base::kind_type t, const std::string v, const location_type& l)
+  calcxx_parser::basic_symbol<Base>::basic_symbol (typename Base::kind_type t, const Node* v, const location_type& l)
     : Base (t)
     , value (v)
     , location (l)
@@ -910,15 +914,18 @@ namespace yy {
     // Type destructor.
     switch (yytype)
     {
-      case 21: // "number"
-      case 26: // PackageName
-        value.template destroy< int > ();
-        break;
-
       case 19: // "identifier"
       case 20: // "string"
-      case 31: // ImportPath
-        value.template destroy< std::string > ();
+      case 21: // "number"
+      case 24: // SourceFile
+      case 26: // PackageClause
+      case 27: // PackageName
+      case 28: // ImportDeclS
+      case 29: // ImportDecl
+      case 30: // ImportSpecS
+      case 31: // ImportSpec
+      case 32: // ImportPath
+        value.template destroy< Node* > ();
         break;
 
       default:
@@ -944,15 +951,18 @@ namespace yy {
     super_type::move(s);
       switch (this->type_get ())
     {
-      case 21: // "number"
-      case 26: // PackageName
-        value.move< int > (s.value);
-        break;
-
       case 19: // "identifier"
       case 20: // "string"
-      case 31: // ImportPath
-        value.move< std::string > (s.value);
+      case 21: // "number"
+      case 24: // SourceFile
+      case 26: // PackageClause
+      case 27: // PackageName
+      case 28: // ImportDeclS
+      case 29: // ImportDecl
+      case 30: // ImportSpecS
+      case 31: // ImportSpec
+      case 32: // ImportPath
+        value.move< Node* > (s.value);
         break;
 
       default:
@@ -1120,19 +1130,19 @@ namespace yy {
   }
 
   calcxx_parser::symbol_type
-  calcxx_parser::make_IDENTIFIER (const std::string& v, const location_type& l)
+  calcxx_parser::make_IDENTIFIER (const Node*& v, const location_type& l)
   {
     return symbol_type (token::TOK_IDENTIFIER, v, l);
   }
 
   calcxx_parser::symbol_type
-  calcxx_parser::make_STRING (const std::string& v, const location_type& l)
+  calcxx_parser::make_STRING (const Node*& v, const location_type& l)
   {
     return symbol_type (token::TOK_STRING, v, l);
   }
 
   calcxx_parser::symbol_type
-  calcxx_parser::make_NUMBER (const int& v, const location_type& l)
+  calcxx_parser::make_NUMBER (const Node*& v, const location_type& l)
   {
     return symbol_type (token::TOK_NUMBER, v, l);
   }
@@ -1140,7 +1150,7 @@ namespace yy {
 
 
 } // yy
-#line 1144 "calc++-parser.hh" // lalr1.cc:377
+#line 1154 "calc++-parser.hh" // lalr1.cc:377
 
 
 

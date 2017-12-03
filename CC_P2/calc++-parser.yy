@@ -23,8 +23,11 @@
 
 %code requires
 {
-# include <string>
 class calcxx_driver;
+# include <string>
+# include "Node.h"
+# include "Leaf.h"
+# include "Token.h"
 }
 
 // The parsing context.
@@ -43,6 +46,10 @@ class calcxx_driver;
 %code
 {
 # include "calc++-driver.hh"
+# include <string>
+# include "Node.h"
+# include "Leaf.h"
+# include "Token.h"
 }
 
 %define api.token.prefix {TOK_}
@@ -66,18 +73,26 @@ class calcxx_driver;
   DOT     "."
 ;
 
-%token <std::string> IDENTIFIER "identifier"
-%token <std::string> STRING "string"
-%token <int> NUMBER "number"
-%type  <int> exp
-%type  <int> PackageName
-%type  <std::string> ImportPath
+%token <Node*> IDENTIFIER "identifier"
+%token <Node*> STRING "string"
+%token <Node*> NUMBER "number"
+%type  <Node*> exp
+%type  <Node*> SourceFile
+%type  <Node*> PackageClause
+%type  <Node*> PackageName
+%type  <Node*> ImportDecl
+%type  <Node*> ImportDeclS
+%type  <Node*> ImportSpec
+%type  <Node*> ImportSpecS
+%type  <Node*> ImportPath
+
 
 %printer { yyoutput << $$; } <*>;
 
 %%
 %start unit;
 /* unit: SourceFile  { driver.result = $2; }; */
+/* unit: { driver.rootNode = new Node("SourceFile"); } SourceFile; */
 unit: SourceFile;
 
 /* assignments: */
@@ -90,26 +105,33 @@ unit: SourceFile;
 %left "+" "-";
 %left "*" "/";
 SourceFile:
-  PackageClause ImportDeclS | PackageClause
+  /* PackageClause { driver.rootNode->addNode(*$1);} */ 
+  PackageClause { driver.rootNode.addNode(Node("DummyPackageClause"));} 
+  /* ImportDeclS { driver.rootNode->addNode(*$1);} */ 
+  ImportDeclS { driver.rootNode.addNode(Node("DummyPackageClause"));} 
+  /* | PackageClause { driver.rootNode->addNode(*$1);} */ 
+  | PackageClause { driver.rootNode.addNode(Node("DummyPackageClause"));} 
 
 PackageClause:
-  "package" PackageName
+  "package" PackageName { $$ = new Node("PackageName") ;}
 PackageName:
-  "identifier"   { $$ = driver.variables[$1]; }
+  "identifier"   { $$ = new Node("Identifier");}
 
 ImportDeclS:
-  ImportDeclS ImportDecl | ImportDecl
+  ImportDeclS ImportDecl { $$ = new Node("ImportDeclS") ;}
+  | ImportDecl { $$ = new Node("ImportDeclS") ;}
 ImportDecl:
-  "import" "(" ImportSpecS ")"
-  | "import" ImportSpec
+  "import" "(" ImportSpecS ")" { $$ = new Node("ImportDecl") ;}
+  | "import" ImportSpec  { $$ = new Node("ImportDecl") ;}
 ImportSpecS:
-  ImportSpecS ImportSpec ";" | ImportSpec ";"
+  ImportSpecS ImportSpec ";"  { $$ = new Node("ImportSpecS") ;}
+  | ImportSpec ";"  { $$ = new Node("ImportSpecS") ;}
 ImportSpec:
-  "." ImportPath
-  | PackageName ImportPath
-  | ImportPath
+  "." ImportPath { $$ = new Node("ImportSpec") ;}
+  | PackageName ImportPath { $$ = new Node("ImportSpec") ;}
+  | ImportPath { $$ = new Node("ImportSpec") ;}
 ImportPath:
-  STRING { $$ = driver.variables[$1]; }
+  STRING { $$ = new Node("ImportPath") ;}
 /* exp: */
 /*   exp "+" exp   { $$ = $1 + $3; } */
 /* | exp "-" exp   { $$ = $1 - $3; } */
@@ -120,9 +142,6 @@ ImportPath:
 /* | "number"      { std::swap ($$, $1); }; */
 %%
 
-void
-yy::calcxx_parser::error (const location_type& l,
-                          const std::string& m)
-{
+void yy::calcxx_parser::error (const location_type& l, const std::string& m) {
   driver.error (l, m);
 }

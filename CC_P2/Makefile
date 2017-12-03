@@ -19,7 +19,7 @@
 ####################################################################
 # Uncomment only one of the next two lines (choose your c++ compiler)
 # CC=g++
-CC=clang++
+CC=clang++ -std=c++11 -g
 
 LEX=flex
 YACC=bison
@@ -32,9 +32,9 @@ YFLAGS=-v -d
 
 HEADERS=calc++-parser.hh calc++-scanner.hh
 
-calc++ : calc++.o calc++-scanner.o calc++-parser.o calc++-driver.o
+calc++ : calc++.o calc++-scanner.o calc++-parser.o calc++-driver.o Leaf.o Node.o Token.o
 
-calc++.o : calc++.cc calc++-driver.hh calc++-parser.hh
+calc++.o : calc++.cc calc++-driver.hh calc++-parser.hh Leaf.cpp Node.cpp Token.cpp
 
 %.o: %.cc
 	$(CC) $(CFLAGS) -o $@ -c $<

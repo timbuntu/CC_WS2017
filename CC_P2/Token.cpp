@@ -3,18 +3,18 @@
 
 template <class Type>
 Token<Type>::Token(int tokenType, Type value) {
-	this.tokenType = tokenType;
-	this.value = value;
+	this->tokenType = tokenType;
+	this->value = value;
 }
 
 template <class Type>
-int Toke<Type>n::getTokenType() {
+int Token<Type>::getTokenType() {
 	return tokenType;
 }
 
 template <class Type>
 void Token<Type>::setTokenType(int tokenType) {
-	this.tokenType = tokenType;
+	this->tokenType = tokenType;
 }
 
 template <class Type>
@@ -24,5 +24,5 @@ Type Token<Type>::getValue() {
 
 template <class Type>
 void Token<Type>::setValue(Type value) {
-	this.value = value;
+	this->value = value;
 }

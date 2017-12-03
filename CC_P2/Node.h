@@ -12,6 +12,7 @@ class Node {
 	std::list<Node> nodes;
 
 public:
+	Node();
 	Node(std::string name);
 
 	void addNode(Node node);
