@@ -106,7 +106,7 @@ unit: SourceFile;
 /* %left "*" "/"; */
 SourceFile:
   PackageClause { driver.rootNode.addNode(*$1);} 
-  ImportDeclS { driver.rootNode.addNode(*$3);} 
+  ImportDeclS { driver.rootNode.copyNodes(*$3);} 
   | PackageClause { driver.rootNode.addNode(*$1);} 
 
 PackageClause:
@@ -115,14 +115,14 @@ PackageName:
   "identifier"   { $$ = new Node("Identifier");}
 
 ImportDeclS:
-  ImportDeclS ImportDecl {Node* ret = new Node("ImportDeclS"); ret->addNode(*$1); ret->addNode(*$2); $$ = ret;}
-  | ImportDecl {Node* ret = new Node("ImportDeclS"); ret->addNode(*$1); $$ = ret;}
+  ImportDeclS ImportDecl {Node* ret = new Node("ImportDeclS"); ret->copyNodes(*$1); ret->addNode(*$2); $$ = ret;}
+  | ImportDecl {Node* ret = new Node("ImportDeclS");ret->addNode(*$1); $$ = ret;}
 ImportDecl:
   "import" "(" ImportSpecS ")" {Node* ret = new Node("ImportDecl"); ret->addNode(*$3); $$ = ret;}
-  | "import" ImportSpec  {Node* ret = new Node("ImportDecl"); ret->addNode(*$2); $$ = ret;}
+  | "import" ImportSpec  {Node* ret = new Node("ImportDecl"); ret->copyNodes(*$2); $$ = ret;}
 ImportSpecS:
-  ImportSpecS ImportSpec ";"  {Node* ret = new Node("ImportSpecS"); ret->addNode(*$1); ret->addNode(*$2); $$ = ret;}
-  | ImportSpec ";"  {Node* ret = new Node("ImportSpecS"); ret->addNode(*$1); $$ = ret;}
+  ImportSpecS ImportSpec ";"  {Node* ret = new Node("ImportSpecS"); ret->copyNodes(*$1); ret->addNode(*$2); $$ = ret;}
+  | ImportSpec ";"  { $$ = $1; }
 ImportSpec:
   "." ImportPath {Node* ret = new Node("ImportSpec"); ret->addNode(*$2); $$ = ret;}
   | PackageName ImportPath {Node* ret = new Node("ImportSpec"); ret->addNode(*$1); ret->addNode(*$2); $$ = ret;}

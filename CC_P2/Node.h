@@ -7,19 +7,20 @@
 #include <iostream>
 
 class Node {
-	
-	std::string m_name;
-	std::vector<Node> nodes;
+    
+    std::string m_name;
+    std::vector<Node> nodes;
 
 public:
-	Node();
-	Node(std::string name);
+    Node();
+    Node(std::string name);
 
-	void addNode(Node node);
-	std::vector<Node> getNodes() const;
+    void addNode(Node node);
+    void copyNodes(Node node);
+    std::vector<Node> getNodes() const;
 
-	std::string getName() const;
-	void setName(std::string name);
+    std::string getName() const;
+    void setName(std::string name);
     
     void print(int value) const;
 };
