@@ -9,17 +9,17 @@ Node::Node(std::string name) {
 	m_name = name;
 }
 
-void Node::addNode(Node node) {
+void Node::addNode(Node* node) {
 	nodes.push_back(node);
 }
 
-void Node::copyNodes(Node node){
-    for (int i = 0; i < (int) node.getNodes().size(); i++){
-        addNode(node.getNodes()[i]);
+void Node::copyNodes(Node* node){
+    for (int i = 0; i < (int) node->getNodes().size(); i++){
+        addNode(node->getNodes()[i]);
     }
 }
 
-std::vector<Node> Node::getNodes() const {
+std::vector<Node*> Node::getNodes() const {
 	return nodes;
 }
 
@@ -40,10 +40,8 @@ void Node::print(int level) const {
 
     /* for(Node node : getNodes()){ */
     for (int i = 0; i < (int) getNodes().size(); i++){
-        Node node = getNodes()[i];
-        /* std::cout << node.getName(); */
-        node.print(level+1);
-        /* node.print(level+1); */
+        Node* node = getNodes()[i];
+        node->print(level+1);
     }
     
 }

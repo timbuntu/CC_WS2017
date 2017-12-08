@@ -3,20 +3,19 @@
 #define LEAF
 
 #include "Node.h"
-#include "Token.h"
+#include "Token.hpp"
 
-template <class Type>
 class Leaf : public Node {
 	
-	Token<Type> value;
+        std::string value;
 
  public:
 
-    Leaf(std::string name, Token<Type> value);
-    Token<Type> getValue() const;
-    void setValue(Token<Type> value);
+    Leaf(std::string name, std::string value);
+    
+    std::string getValue() const;
+    void setValue(std::string value);
     void print(int level) const;
-
 };
 
 #endif

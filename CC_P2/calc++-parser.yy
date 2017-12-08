@@ -27,7 +27,6 @@ class calcxx_driver;
 # include <string>
 # include "Node.h"
 # include "Leaf.h"
-# include "Token.h"
 }
 
 // The parsing context.
@@ -49,7 +48,6 @@ class calcxx_driver;
 # include <string>
 # include "Node.h"
 # include "Leaf.h"
-# include "Token.h"
 }
 
 %define api.token.prefix {TOK_}
@@ -84,7 +82,12 @@ class calcxx_driver;
 %type  <Node*> ImportDeclS
 %type  <Node*> ImportSpec
 %type  <Node*> ImportSpecS
-%type  <Node*> ImportPath
+%type  <Node*> TopLevelDecl
+%type  <Node*> TopLevelDeclS
+%type  <Node*> FunctionDecl
+%type  <Leaf*> FunctionName
+%type  <Leaf*> ImportPath
+
 
 
 /* %printer { yyoutput << $$; } <*>; */
@@ -104,31 +107,49 @@ unit: SourceFile;
 
 /* %left "+" "-"; */
 /* %left "*" "/"; */
+
 SourceFile:
-  PackageClause { driver.rootNode.addNode(*$1);} 
-  ImportDeclS { driver.rootNode.copyNodes(*$3);} 
-  | PackageClause { driver.rootNode.addNode(*$1);} 
+  PackageClause { driver.rootNode.addNode($1);} 
+
+  | PackageClause { driver.rootNode.addNode($1); int a = 1; } ImportDeclS { driver.rootNode.copyNodes($3);} 
+
+  | PackageClause { driver.rootNode.addNode($1); int b = 2; } TopLevelDeclS { driver.rootNode.copyNodes($3);} 
+
+  | PackageClause { driver.rootNode.addNode($1);} ImportDeclS { driver.rootNode.copyNodes($3);} TopLevelDeclS { driver.rootNode.copyNodes($5);}
+
 
 PackageClause:
-  "package" PackageName { Node* ret = new Node("PackageName"); ret->addNode(*$2); $$ = ret;}
+  "package" PackageName { Node* ret = new Node("PackageName"); ret->addNode($2); $$ = ret;}
 PackageName:
-  "identifier"   { $$ = new Node("Identifier");}
+  "identifier"   { $$ = new Leaf("PackageName", $1);}
 
 ImportDeclS:
-  ImportDeclS ImportDecl {Node* ret = new Node("ImportDeclS"); ret->copyNodes(*$1); ret->addNode(*$2); $$ = ret;}
-  | ImportDecl {Node* ret = new Node("ImportDeclS");ret->addNode(*$1); $$ = ret;}
+  ImportDeclS ImportDecl {Node* ret = new Node("ImportDeclS"); ret->copyNodes($1); ret->addNode($2); $$ = ret;}
+  | ImportDecl {Node* ret = new Node("ImportDeclS");ret->addNode($1); $$ = ret;}
 ImportDecl:
-  "import" "(" ImportSpecS ")" {Node* ret = new Node("ImportDecl"); ret->copyNodes(*$3); $$ = ret;}
-  | "import" ImportSpec  {Node* ret = new Node("ImportDecl"); ret->addNode(*$2); $$ = ret;}
+  "import" "(" ImportSpecS ")" {Node* ret = new Node("ImportDecl"); ret->addNode(new Leaf("Keyword", "import")); ret->copyNodes($3); $$ = ret;}
+  | "import" ImportSpec  {Node* ret = new Node("ImportDecl");  ret->addNode(new Leaf("Keyword", "import")); ret->addNode($2); $$ = ret;}
 ImportSpecS:
-  ImportSpecS ImportSpec ";"  {Node* ret = new Node("ImportSpecS"); ret->copyNodes(*$1); ret->addNode(*$2); $$ = ret;}
-  | ImportSpec ";"  { Node* ret = new Node("ImportSpecS"); ret->addNode(*$1); $$ = ret; }
+  ImportSpecS ImportSpec ";"  {Node* ret = new Node("ImportSpecS"); ret->copyNodes($1); ret->addNode($2); $$ = ret;}
+  | ImportSpec ";"  { Node* ret = new Node("ImportSpecS"); ret->addNode($1); $$ = ret; }
 ImportSpec:
-  "." ImportPath {Node* ret = new Node("ImportSpec"); ret->addNode(*$2); $$ = ret;}
-  | PackageName ImportPath {Node* ret = new Node("ImportSpec"); ret->addNode(*$1); ret->addNode(*$2); $$ = ret;}
-  | ImportPath {Node* ret = new Node("ImportSpec"); ret->addNode(*$1); $$ = ret;}
+  "." ImportPath {Node* ret = new Node("ImportSpec"); ret->addNode($2); $$ = ret;}
+  | PackageName ImportPath {Node* ret = new Node("ImportSpec"); ret->addNode($1); ret->addNode($2); $$ = ret;}
+  | ImportPath {Node* ret = new Node("ImportSpec"); ret->addNode($1); $$ = ret;}
 ImportPath:
-  STRING { $$ = new Node("ImportPath") ;}
+  STRING { $$ = new Leaf("ImportPath", $1) ; }
+
+
+TopLevelDeclS:
+  TopLevelDeclS TopLevelDecl {Node* ret = new Node("TopLevelDeclS"); ret->copyNodes($1); ret->addNode($2); $$ = ret;}
+  | TopLevelDecl {Node* ret = new Node("TopLevelDeclS"); ret->addNode($1); $$ = ret;}
+TopLevelDecl:
+  FunctionDecl {Node* ret = new Node("TopLevelDecl"); ret->addNode($1); $$ = ret;}
+FunctionDecl:
+  "func" FunctionName {Node* ret = new Node("FunctionDecl"); ret->addNode(new Leaf("Keyword", "func")); ret->addNode($2); $$ = ret;}
+FunctionName:
+  "identifier" { $$ = new Leaf("FunctionName", $1); }
+
 /* exp: */
 /*   exp "+" exp   { $$ = $1 + $3; } */
 /* | exp "-" exp   { $$ = $1 - $3; } */

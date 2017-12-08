@@ -18,7 +18,6 @@
 # $^ = The names of all the prerequisites, with spaces between them.
 ####################################################################
 # Uncomment only one of the next two lines (choose your c++ compiler)
-# CC=g++
 CC=clang++ -std=c++11 -g
 
 LEX=flex
@@ -32,11 +31,17 @@ YFLAGS=-v -d
 
 HEADERS=calc++-parser.hh calc++-scanner.hh
 
-calc++ : calc++.o calc++-scanner.o calc++-parser.o calc++-driver.o Leaf.o Node.o Token.o
+calc++ : calc++.o calc++-scanner.o calc++-parser.o calc++-driver.o Leaf.o Node.o
 
-calc++.o : calc++.cc calc++-driver.hh calc++-parser.hh Leaf.cpp Node.cpp Token.cpp
+calc++.o : calc++.cc calc++-driver.hh calc++-parser.hh Leaf.cpp Node.cpp
 
 %.o: %.cc
+	$(CC) $(CFLAGS) -o $@ -c $<
+
+%.o: %.cpp
+	$(CC) $(CFLAGS) -o $@ -c $<
+
+%.o: %.hpp
 	$(CC) $(CFLAGS) -o $@ -c $<
 
 calc++-scanner.cc: calc++-scanner.ll
@@ -48,5 +53,5 @@ calc++-parser.cc calc++-parser.hh: calc++-parser.yy
 clean:
 	$(RM) *~ *.o  calc++  calc++-scanner.cc calc++-parser.cc  calc++-scanner.hh calc++-parser.hh calc++-parser.output location.hh stack.hh position.hh
 
-tests: test.sh calc++
-	./test.sh
+tests:
+	./test_nice.sh

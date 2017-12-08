@@ -1,3 +1,5 @@
+package foo
+
 import (
  "errors" ;
  "fmt" ;

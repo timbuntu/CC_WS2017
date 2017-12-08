@@ -1,6 +1,7 @@
 #include "calc++-driver.hh"
 #include "calc++-parser.hh"
 # include "Node.h"
+# include "Leaf.h"
 
 calcxx_driver::calcxx_driver () : trace_scanning (false), trace_parsing (false) {
         /* result = 42; */

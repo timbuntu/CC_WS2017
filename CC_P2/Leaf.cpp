@@ -2,28 +2,22 @@
 #include "Leaf.h"
 
 
-template <class Type>
-Leaf<Type>::Leaf(std::string name, Token<Type> value) 
-: Node(name)
-{
- this->value(value);
+Leaf::Leaf(std::string name, std::string value) : Node(name) {
+ this->value = value;
 }
 
-template <class Type>
-Token<Type> Leaf<Type>::getValue() const {
+std::string Leaf::getValue() const {
     return value;
 }
 
-template <class Type>
-void Leaf<Type>::setValue(Token<Type> value) {
+void Leaf::setValue(std::string value) {
     this->value = value;
 }
 
-template <class Type>
-void Leaf<Type>::print(int level) const {
+void Leaf::print(int level) const {
     for(int i = 0; i < level; i++)
             std::cout << '\t';
 
-    std::cout << value.getTokenType() << ' ' << value.getValue() << std::endl;
+    std::cout << getName() << " " << value << std::endl;
 }
 
