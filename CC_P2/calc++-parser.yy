@@ -118,11 +118,11 @@ ImportDeclS:
   ImportDeclS ImportDecl {Node* ret = new Node("ImportDeclS"); ret->copyNodes(*$1); ret->addNode(*$2); $$ = ret;}
   | ImportDecl {Node* ret = new Node("ImportDeclS");ret->addNode(*$1); $$ = ret;}
 ImportDecl:
-  "import" "(" ImportSpecS ")" {Node* ret = new Node("ImportDecl"); ret->addNode(*$3); $$ = ret;}
-  | "import" ImportSpec  {Node* ret = new Node("ImportDecl"); ret->copyNodes(*$2); $$ = ret;}
+  "import" "(" ImportSpecS ")" {Node* ret = new Node("ImportDecl"); ret->copyNodes(*$3); $$ = ret;}
+  | "import" ImportSpec  {Node* ret = new Node("ImportDecl"); ret->addNode(*$2); $$ = ret;}
 ImportSpecS:
   ImportSpecS ImportSpec ";"  {Node* ret = new Node("ImportSpecS"); ret->copyNodes(*$1); ret->addNode(*$2); $$ = ret;}
-  | ImportSpec ";"  { $$ = $1; }
+  | ImportSpec ";"  { Node* ret = new Node("ImportSpecS"); ret->addNode(*$1); $$ = ret; }
 ImportSpec:
   "." ImportPath {Node* ret = new Node("ImportSpec"); ret->addNode(*$2); $$ = ret;}
   | PackageName ImportPath {Node* ret = new Node("ImportSpec"); ret->addNode(*$1); ret->addNode(*$2); $$ = ret;}
