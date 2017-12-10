@@ -107,15 +107,10 @@ unit: SourceFile;
 
 /* %left "+" "-"; */
 /* %left "*" "/"; */
+%right "func" "import";
 
 SourceFile:
-  PackageClause { driver.rootNode.addNode($1);} 
-
-  | PackageClause { driver.rootNode.addNode($1); int a = 1; } ImportDeclS { driver.rootNode.copyNodes($3);} 
-
-  | PackageClause { driver.rootNode.addNode($1); int b = 2; } TopLevelDeclS { driver.rootNode.copyNodes($3);} 
-
-  | PackageClause { driver.rootNode.addNode($1);} ImportDeclS { driver.rootNode.copyNodes($3);} TopLevelDeclS { driver.rootNode.copyNodes($5);}
+  PackageClause { driver.rootNode.addNode($1);} ImportDeclS { driver.rootNode.copyNodes($3);} TopLevelDeclS { driver.rootNode.copyNodes($5);}
 
 
 PackageClause:
@@ -124,7 +119,8 @@ PackageName:
   "identifier"   { $$ = new Leaf("PackageName", $1);}
 
 ImportDeclS:
-  ImportDeclS ImportDecl {Node* ret = new Node("ImportDeclS"); ret->copyNodes($1); ret->addNode($2); $$ = ret;}
+  %empty {$$ = new Node("Empty ImportDeclS");}
+  |ImportDeclS ImportDecl {Node* ret = new Node("ImportDeclS"); ret->copyNodes($1); ret->addNode($2); $$ = ret;}
   | ImportDecl {Node* ret = new Node("ImportDeclS");ret->addNode($1); $$ = ret;}
 ImportDecl:
   "import" "(" ImportSpecS ")" {Node* ret = new Node("ImportDecl"); ret->addNode(new Leaf("Keyword", "import")); ret->copyNodes($3); $$ = ret;}
@@ -141,7 +137,8 @@ ImportPath:
 
 
 TopLevelDeclS:
-  TopLevelDeclS TopLevelDecl {Node* ret = new Node("TopLevelDeclS"); ret->copyNodes($1); ret->addNode($2); $$ = ret;}
+  %empty {$$ = new Node("Empty ImportDeclS");}
+  |TopLevelDeclS TopLevelDecl {Node* ret = new Node("TopLevelDeclS"); ret->copyNodes($1); ret->addNode($2); $$ = ret;}
   | TopLevelDecl {Node* ret = new Node("TopLevelDeclS"); ret->addNode($1); $$ = ret;}
 TopLevelDecl:
   FunctionDecl {Node* ret = new Node("TopLevelDecl"); ret->addNode($1); $$ = ret;}
