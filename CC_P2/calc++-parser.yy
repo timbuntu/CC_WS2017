@@ -88,7 +88,10 @@ class calcxx_driver;
 %type  <Leaf*> FunctionName
 %type  <Leaf*> ImportPath
 
-
+%precedence "ImportDecl"
+%precedence "ImportDeclS"
+%precedence "ImportSpec"
+%precedence "ImportSpecS"
 
 /* %printer { yyoutput << $$; } <*>; */
 
@@ -107,7 +110,6 @@ unit: SourceFile;
 
 /* %left "+" "-"; */
 /* %left "*" "/"; */
-%right "func" "import";
 
 SourceFile:
   PackageClause { driver.rootNode.addNode($1);} ImportDeclS { driver.rootNode.copyNodes($3);} TopLevelDeclS { driver.rootNode.copyNodes($5);}
@@ -120,8 +122,8 @@ PackageName:
 
 ImportDeclS:
   %empty {$$ = new Node("Empty ImportDeclS");}
-  |ImportDeclS ImportDecl {Node* ret = new Node("ImportDeclS"); ret->copyNodes($1); ret->addNode($2); $$ = ret;}
-  | ImportDecl {Node* ret = new Node("ImportDeclS");ret->addNode($1); $$ = ret;}
+  | ImportDeclS ImportDecl {Node* ret = new Node("ImportDeclS"); ret->copyNodes($1); ret->addNode($2); $$ = ret;}  %prec "ImportDeclS"
+  /* | ImportDecl {Node* ret = new Node("ImportDeclS");ret->addNode($1); $$ = ret;} */
 ImportDecl:
   "import" "(" ImportSpecS ")" {Node* ret = new Node("ImportDecl"); ret->addNode(new Leaf("Keyword", "import")); ret->copyNodes($3); $$ = ret;}
   | "import" ImportSpec  {Node* ret = new Node("ImportDecl");  ret->addNode(new Leaf("Keyword", "import")); ret->addNode($2); $$ = ret;}
@@ -139,7 +141,7 @@ ImportPath:
 TopLevelDeclS:
   %empty {$$ = new Node("Empty ImportDeclS");}
   |TopLevelDeclS TopLevelDecl {Node* ret = new Node("TopLevelDeclS"); ret->copyNodes($1); ret->addNode($2); $$ = ret;}
-  | TopLevelDecl {Node* ret = new Node("TopLevelDeclS"); ret->addNode($1); $$ = ret;}
+  /* | TopLevelDecl {Node* ret = new Node("TopLevelDeclS"); ret->addNode($1); $$ = ret;} */
 TopLevelDecl:
   FunctionDecl {Node* ret = new Node("TopLevelDecl"); ret->addNode($1); $$ = ret;}
 FunctionDecl:

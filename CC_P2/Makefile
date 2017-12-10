@@ -22,7 +22,7 @@ CC=clang++ -std=c++11 -g
 
 LEX=flex
 YACC=bison
-YFLAGS=-v -d
+YFLAGS=-vv -d
 # Wo   -d wichtig ist, weil damit Header-Dateien erzeugt werden
 #         (*.hh - und nicht nur Quellcode in *.cc)
 # aber -v nicht so wichtig ist, weil damit "nur" die  Datei
