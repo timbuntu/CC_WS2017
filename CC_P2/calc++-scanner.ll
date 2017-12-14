@@ -69,6 +69,7 @@ string_lit  [\"`][^\"']*[\"`]
 "package"        return yy::calcxx_parser::make_PACKAGE(loc); 
 "import"         return yy::calcxx_parser::make_IMPORT(loc); 
 "func"           return yy::calcxx_parser::make_FUNC(loc); 
+"var"           return yy::calcxx_parser::make_VAR(loc); 
 
 
 {int}      {

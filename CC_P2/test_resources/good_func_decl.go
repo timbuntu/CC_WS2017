@@ -13,4 +13,7 @@ import (
  "time" ;
 )
 
-func sexy
+func sexy (){
+        var a = 1 + 1
+        var b = 15 
+}

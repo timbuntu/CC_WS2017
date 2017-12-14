@@ -68,6 +68,7 @@ class calcxx_driver;
   PACKAGE "package"
   IMPORT  "import"
   FUNC    "func"
+  VAR    "var"
   DOT     "."
 ;
 
@@ -85,6 +86,22 @@ class calcxx_driver;
 %type  <Node*> TopLevelDecl
 %type  <Node*> TopLevelDeclS
 %type  <Node*> FunctionDecl
+%type  <Node*> Expression
+%type  <Node*> ExpressionList
+%type  <Node*> IdentifierList
+%type  <Node*> Declaration
+%type  <Node*> VarDecl
+%type  <Node*> VarSpec
+%type  <Node*> VarSpecS
+%type  <Node*> Literal
+%type  <Node*> UnaryExpr
+%type  <Node*> PrimaryExpr
+%type  <Node*> binary_op
+%type  <Node*> unary_op
+%type  <Node*> Block
+%type  <Node*> Signature
+%type  <Node*> FunctionBody
+%type  <Node*> Function
 %type  <Leaf*> FunctionName
 %type  <Leaf*> ImportPath
 
@@ -140,14 +157,75 @@ ImportPath:
 
 TopLevelDeclS:
   %empty {$$ = new Node("Empty ImportDeclS");}
-  |TopLevelDeclS TopLevelDecl {Node* ret = new Node("TopLevelDeclS"); ret->copyNodes($1); ret->addNode($2); $$ = ret;}
-  /* | TopLevelDecl {Node* ret = new Node("TopLevelDeclS"); ret->addNode($1); $$ = ret;} */
+  | TopLevelDeclS TopLevelDecl {Node* ret = new Node("TopLevelDeclS"); ret->copyNodes($1); ret->addNode($2); $$ = ret;}
 TopLevelDecl:
   FunctionDecl {Node* ret = new Node("TopLevelDecl"); ret->addNode($1); $$ = ret;}
+  | Declaration {Node* ret = new Node("TopLevelDecl"); ret->addNode($1); $$ = ret;}
+
 FunctionDecl:
-  "func" FunctionName {Node* ret = new Node("FunctionDecl"); ret->addNode(new Leaf("Keyword", "func")); ret->addNode($2); $$ = ret;}
+  "func" FunctionName Function {Node* ret = new Node("FunctionDecl"); ret->addNode(new Leaf("Keyword", "func")); ret->addNode($2); ret->addNode($3); $$ = ret;}
 FunctionName:
   "identifier" { $$ = new Leaf("FunctionName", $1); }
+Function:
+   Signature FunctionBody {Node* ret = new Node("Function"); ret->addNode($1); ret->addNode($2); $$ = ret;}
+FunctionBody:
+   "{" Block "}" {Node* ret = new Node("FunctionBody"); ret->addNode($2); $$ = ret; }
+Block:
+   %empty {$$ = new Node("Empty Block");}
+   | Declaration {Node* ret = new Node("Block"); ret->addNode($1); $$ = ret; }
+   | Block Declaration {Node* ret = new Node("Block"); ret->copyNodes($1); ret->addNode($2); $$ = ret;}
+Signature:
+         "(" ")" {$$ = new Node("Signature");}
+
+Declaration:
+           VarDecl { Node* ret = new Node("Declaration"); ret->addNode($1); $$ = ret;}
+
+VarDecl:
+       "var" VarSpecS { Node* ret = new Node("VarDecl"); ret->copyNodes($2); $$ = ret;}
+
+VarSpecS:
+        VarSpec  {Node* ret = new Node("VarSpecS"); ret->addNode($1); $$ = ret;}
+        | VarSpecS VarSpec {Node* ret = new Node("VarSpecS"); ret->copyNodes($1); ret->addNode($2); $$ = ret;}
+
+VarSpec:
+       IdentifierList "=" ExpressionList  {Node* ret = new Node("VarSpec"); ret->addNode($1); ret->addNode(new Leaf("Assign", "=")); ret->copyNodes($3); $$ = ret;}
+
+Expression:
+          UnaryExpr  {Node* ret = new Node("Expression"); ret->addNode($1); $$ = ret;}
+          | Expression binary_op Expression {Node* ret = new Node("Expression"); ret->addNode($1); ret->addNode($2); ret->addNode($3); $$ = ret;}
+
+UnaryExpr: 
+         PrimaryExpr {Node* ret = new Node("UnaryExpr"); ret->addNode($1); $$ = ret;}
+         | unary_op UnaryExpr {Node* ret = new Node("UnaryExpr"); ret->addNode($1); ret->addNode($2); $$ = ret;}
+
+PrimaryExpr:
+           "identifier" { $$ = new Leaf("PrimaryExpr", $1); }
+          | Literal {Node* ret = new Node("PrimaryExpr"); ret->addNode($1); $$ = ret;}
+
+Literal: NUMBER {$$ = new Leaf("Literal", std::to_string($1));}
+         | STRING {$$ = new Leaf("Literal", $1);}
+
+unary_op:
+        "+" { $$ = new Leaf("unary_op", "+");}
+        | "-" { $$ = new Leaf("unary_op", "-");}
+        | "*" { $$ = new Leaf("unary_op", "*");}
+
+binary_op:
+        "+" { $$ = new Leaf("binary_op", "+");}
+        | "-" { $$ = new Leaf("binary_op", "-");}
+        | "*" { $$ = new Leaf("binary_op", "*");}
+        | "/" { $$ = new Leaf("binary_op", "/");}
+        | "!=" { $$ = new Leaf("binary_op", "!=");}
+
+ExpressionList:
+              Expression {Node* ret = new Node("ExpressionList"); ret->addNode($1); $$ = ret;}
+              | Expression "," ExpressionList { Node* ret = new Node("ExpressionList"); ret->addNode($1); ret->copyNodes($3); $$ = ret;}
+
+IdentifierList:
+              "identifier" {$$ = new Leaf("identifier", $1); }
+              | "identifier" "," IdentifierList {Node* ret = new Node("IdentifierList"); ret->addNode(new Leaf("identifier", $1)); ret->copyNodes($3); $$ = ret;}
+
+
 
 /* exp: */
 /*   exp "+" exp   { $$ = $1 + $3; } */
