@@ -23,6 +23,7 @@ ImportPath       = string_lit .
 
 ```
 TopLevelDecl     = FunctionDecl
+TopLevelDecl     = Declaration | FunctionDecl | MethodDecl .
 ```
 
 ## Function Declaration
